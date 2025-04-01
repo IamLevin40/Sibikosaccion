@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,8 +20,10 @@ public class Player : MonoBehaviour
     public GameObject noMorePropertyUI;
     public GameObject gameOverUI;
     public GameObject successUI;
+    public EditProperty editPropertyUI;
 
     private Tile currentTile;
+    private int totalTilesWithCustomersRemaining;
 
     public void Start()
     {
@@ -31,16 +34,17 @@ public class Player : MonoBehaviour
     private void UpdateUI()
     {
         UpdateBudgetUI();
-        buyPropertyUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => BuyProperty());
+        buyPropertyUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => BuyProperty());
         buyPropertyUI.SetActive(false);
-        insufficientFundsUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => OpenSellPropertyUI());
-        insufficientFundsUI.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver());
+        insufficientFundsUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => OpenSellPropertyUI());
+        insufficientFundsUI.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver());
         insufficientFundsUI.SetActive(false);
         sellPropertyUI.SetActive(false);
         noMorePropertyUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver());
         noMorePropertyUI.SetActive(false);
         gameOverUI.SetActive(false);
         successUI.SetActive(false);
+        editPropertyUI.gameObject.SetActive(false);
     }
 
     public void Move(int steps)
@@ -66,20 +70,59 @@ public class Player : MonoBehaviour
             transform.position = targetPosition;
             yield return new WaitForSeconds(0.2f);
         }
+        isMoving = false;
         
+        InitializeCustomers();
+    }
+
+    private void InitializeCustomers()
+    {
         currentTile = board.tiles[currentTileIndex];
         currentTile.tileData.OnLand(this);
 
-        if (currentTile.tileData.tileType == TileType.Property && currentTile.runtimePropertyData != null && !currentTile.runtimePropertyData.isBought)
+        totalTilesWithCustomersRemaining = 0;
+        List<Tile> boughtTiles = new List<Tile>();
+        foreach (var tile in board.tiles)
         {
-            CheckPropertyPurchase();
+            if (tile.runtimePropertyData != null && tile.runtimePropertyData.isBought)
+            {
+                boughtTiles.Add(tile);
+                totalTilesWithCustomersRemaining++;
+            }
+        }
+
+        if (totalTilesWithCustomersRemaining == 0)
+        {
+            OnCustomersFinished();
+            return;
+        }
+
+        foreach (var tile in boughtTiles)
+        {
+            tile.SpawnCustomers(OnCustomersFinished);
+        }
+    }
+
+    private void OnCustomersFinished()
+    {
+        totalTilesWithCustomersRemaining--;
+        if (totalTilesWithCustomersRemaining > 0) return;
+        
+        if (currentTile.tileData.tileType == TileType.Property && currentTile.runtimePropertyData != null)
+        {
+            if (currentTile.runtimePropertyData.isBought)
+            {
+                UpdateEditPropertyVisual();
+            }
+            else
+            {
+                CheckPropertyPurchase();
+            }
         }
         else
         {
             dice.rollButton.interactable = true;
         }
-        
-        isMoving = false;
     }
 
     private void UpdateBudgetUI()
@@ -95,18 +138,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void UpdateEditPropertyVisual()
+    {
+        editPropertyUI.gameObject.SetActive(true);
+        editPropertyUI.Initialize(currentTile);
+    }
+
     private void CheckPropertyPurchase()
     {
         if (budget >= currentTile.runtimePropertyData.purchaseCost)
         {
             buyPropertyUI.SetActive(true);
-            buyPropertyUI.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = $"P {currentTile.runtimePropertyData.purchaseCost}";
+            buyPropertyUI.transform.GetChild(0).GetComponent<Text>().text = currentTile.tileData.tileName;
+            buyPropertyUI.transform.GetChild(1).GetComponent<Image>().sprite = currentTile.tileData.tileLogoSprite;
+            buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {currentTile.runtimePropertyData.purchaseCost}";
         }
         else
         {
             if (HasOwnedProperties())
             {
-                insufficientFundsUI.transform.GetChild(0).GetComponent<Text>().text =  $"NEED P {currentTile.runtimePropertyData.purchaseCost - budget} MORE";
+                insufficientFundsUI.transform.GetChild(0).GetComponent<Text>().text = currentTile.tileData.tileName;
+                insufficientFundsUI.transform.GetChild(1).GetComponent<Image>().sprite = currentTile.tileData.tileLogoSprite;
+                insufficientFundsUI.transform.GetChild(2).GetComponent<Text>().text =  $"NEED P {currentTile.runtimePropertyData.purchaseCost - budget} MORE";
                 insufficientFundsUI.SetActive(true);
                 GenerateSellButtons();
             }
@@ -126,6 +179,7 @@ public class Player : MonoBehaviour
         currentTile.UpdatePropertyVisual();
         buyPropertyUI.SetActive(false);
         dice.rollButton.interactable = true;
+        UpdateEditPropertyVisual();
 
         Debug.Log($"{name} bought {currentTile.tileData.tileName} for {currentTile.runtimePropertyData.purchaseCost}. Remaining budget: {budget}");
     }

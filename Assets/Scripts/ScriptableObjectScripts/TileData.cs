@@ -6,6 +6,7 @@ public enum TileType { Start, Property, Mystery };
 public class TileData : ScriptableObject
 {
     public string tileName;
+    public Sprite tileLogoSprite;
     public TileType tileType;
 
     public virtual void OnLand(Player player)

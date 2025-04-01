@@ -8,7 +8,11 @@ public class PropertyData : ScriptableObject
     public float sellRate = 0.8f;
     public Sprite abandonSprite;
     public Sprite boughtSprite;
-    public int pricePerProduct;
+    public int marketPrice;
+    public int reasonableMarketPrice;
     public int taxRate;
+    public int reasonableTaxRate;
     public int revenue;
+    public int minCustomer = 1;
+    public int maxCustomer = 4;
 }

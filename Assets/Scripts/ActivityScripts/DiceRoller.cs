@@ -9,6 +9,7 @@ public class DiceRoller : MonoBehaviour
     public Player player;
     public Button rollButton;
     public Transform diceTransform;
+    public GameObject editPropertyUI;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class DiceRoller : MonoBehaviour
     public void RollDice()
     {
         if (player.isMoving) return;
+        editPropertyUI.SetActive(false);
         StartCoroutine(RollDiceAnimation());
     }
 
@@ -26,11 +28,11 @@ public class DiceRoller : MonoBehaviour
     {
         rollButton.interactable = false;
         float scaleDuration = 0.2f;
-        float rollDuration = 1.0f;
+        float rollDuration = 0.8f;
         
-        // scale up effect
+        // Scale up effect
         Vector3 originalScale = diceTransform.localScale;
-        Vector3 enlargedScale = originalScale * 1.2f;
+        Vector3 enlargedScale = originalScale * 1.25f;
         float timer = 0f;
         while (timer < scaleDuration)
         {
@@ -39,7 +41,7 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
         
-        // rolling effect
+        // Rolling effect
         timer = 0f;
         int randomFace = 0;
         while (timer < rollDuration)
@@ -50,11 +52,11 @@ public class DiceRoller : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         
-        // final dice result
+        // Final dice result
         int finalResult = Random.Range(0, diceFaces.Length);
         diceImage.sprite = diceFaces[finalResult];
         
-        // scale down effect
+        // Scale down effect
         timer = 0f;
         while (timer < scaleDuration)
         {
@@ -63,7 +65,7 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
         
-        // move the player
+        // Move the player
         player.Move(finalResult + 1);
     }
 }
