@@ -13,6 +13,7 @@ public class DiceRoller : MonoBehaviour
     private void Start()
     {
         rollButton.onClick.AddListener(RollDice);
+        rollButton.interactable = true;
     }
 
     public void RollDice()
@@ -64,6 +65,5 @@ public class DiceRoller : MonoBehaviour
         
         // move the player
         player.Move(finalResult + 1);
-        rollButton.interactable = true;
     }
 }
