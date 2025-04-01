@@ -47,7 +47,8 @@ public class Tile : MonoBehaviour
         {
             GameObject customerPrefab = customerVariants[Random.Range(0, customerVariants.Length)];
             GameObject newCustomer = Instantiate(customerPrefab, customersUI);
-            newCustomer.transform.position = customerSpawnPoint.position;
+            Vector3 spawnOffset = new Vector3(Random.Range(0f, 0.25f), Random.Range(0f, 0.25f), 0);
+            newCustomer.transform.position = customerSpawnPoint.position + spawnOffset;
             newCustomer.GetComponent<Customer>().Initialize(this, customerEndPoint, OnCustomerExit);
             yield return new WaitForSeconds(Random.Range(0.25f, 5f / count));
         }

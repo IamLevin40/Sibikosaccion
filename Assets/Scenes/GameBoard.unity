@@ -8665,7 +8665,7 @@ MonoBehaviour:
   currentTileIndex: 0
   board: {fileID: 201054538}
   isMoving: 0
-  budget: 500
+  budget: 2500
   budgetText: {fileID: 798206847}
   buyPropertyUI: {fileID: 771215507}
   insufficientFundsUI: {fileID: 1666252833}

@@ -41,14 +41,20 @@ public class Customer : MonoBehaviour
 
     private void EvaluateProperty()
     {
-        if (propertyTile.runtimePropertyData.marketPrice <= propertyTile.runtimePropertyData.reasonableMarketPrice)
+        int price = propertyTile.runtimePropertyData.marketPrice;
+        int reasonablePrice = propertyTile.runtimePropertyData.reasonableMarketPrice;
+        float maxPrice = reasonablePrice * 1.2f;
+        
+        float angryChance = Mathf.Clamp01((price - reasonablePrice) / (maxPrice - reasonablePrice));
+        
+        if (Random.value < angryChance)
         {
-            emotion = Emotion.Love;
-            propertyTile.runtimePropertyData.revenue += propertyTile.runtimePropertyData.marketPrice;
+            emotion = Emotion.Angry;
         }
         else
         {
-            emotion = Emotion.Angry;
+            emotion = Emotion.Love;
+            propertyTile.runtimePropertyData.revenue += price;
         }
         UpdateEmotionVisual();
     }
