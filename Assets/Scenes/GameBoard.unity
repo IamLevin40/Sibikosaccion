@@ -420,6 +420,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1477551020}
   customerEndPoint: {fileID: 374403497}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &77487455
@@ -1572,6 +1576,7 @@ RectTransform:
   m_Children:
   - {fileID: 444148483}
   - {fileID: 167324271}
+  - {fileID: 818988563}
   - {fileID: 771215508}
   - {fileID: 1666252834}
   - {fileID: 566164985}
@@ -1882,6 +1887,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1049017794}
   customerEndPoint: {fileID: 2036381772}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &302161953
@@ -1936,6 +1945,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &310745936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310745937}
+  - component: {fileID: 310745939}
+  - component: {fileID: 310745938}
+  m_Layer: 5
+  m_Name: Message
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &310745937
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310745936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1283781543}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &310745938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310745936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &310745939
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310745936}
+  m_CullTransparentMesh: 1
 --- !u!1 &321668817
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2693,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1185802821}
   customerEndPoint: {fileID: 1902842750}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &401519531
@@ -3454,6 +3542,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1069072499}
   customerEndPoint: {fileID: 835526606}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &511196149
@@ -3560,6 +3652,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 0}
   customerEndPoint: {fileID: 0}
   customersUI: {fileID: 0}
+  messageMarkersUI: {fileID: 0}
+  messageMarkerPrefab: {fileID: 0}
+  lendMoneySprite: {fileID: 0}
+  angrySprite: {fileID: 0}
   customerVariants: []
 --- !u!212 &513075510
 SpriteRenderer:
@@ -3778,6 +3874,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1193824693}
   customerEndPoint: {fileID: 229986401}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &531521611
@@ -4286,6 +4386,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1689026165}
   customerEndPoint: {fileID: 1283976924}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &774817341
@@ -4582,6 +4686,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &818988562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818988563}
+  m_Layer: 5
+  m_Name: MessageMarkersUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &818988563
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818988562}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 220554267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &819360973
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,6 +5274,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 324401094}
+  - {fileID: 1283781543}
   - {fileID: 2116156756}
   m_Father: {fileID: 878789446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5447,6 +5587,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 0}
   customerEndPoint: {fileID: 0}
   customersUI: {fileID: 0}
+  messageMarkersUI: {fileID: 0}
+  messageMarkerPrefab: {fileID: 0}
+  lendMoneySprite: {fileID: 0}
+  angrySprite: {fileID: 0}
   customerVariants: []
 --- !u!212 &1075870200
 SpriteRenderer:
@@ -5936,6 +6080,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 813677423}
   customerEndPoint: {fileID: 1768171396}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1108970133
@@ -6219,6 +6367,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 947212165}
   customerEndPoint: {fileID: 486092775}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1134377679
@@ -6656,6 +6808,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1169100597}
   customerEndPoint: {fileID: 1567345431}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1211055215
@@ -6788,6 +6944,127 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265093663}
+  m_CullTransparentMesh: 1
+--- !u!1 &1283781542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283781543}
+  - component: {fileID: 1283781546}
+  - component: {fileID: 1283781545}
+  - component: {fileID: 1283781544}
+  m_Layer: 5
+  m_Name: MessageMarkerPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1283781543
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283781542}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 310745937}
+  m_Father: {fileID: 1030982476}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -140, y: -620}
+  m_SizeDelta: {x: 110, y: 110}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1283781544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283781542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1283781545}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1283781545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283781542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 63f01e61841433a429cc334d88165695, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1283781546
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283781542}
   m_CullTransparentMesh: 1
 --- !u!1 &1283976923
 GameObject:
@@ -7651,6 +7928,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1089136527}
   customerEndPoint: {fileID: 146293753}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1444538581
@@ -7757,6 +8038,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 508155461}
   customerEndPoint: {fileID: 2063251084}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1460204113
@@ -7996,6 +8281,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1832436359}
   customerEndPoint: {fileID: 1096067985}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1479435653
@@ -8266,6 +8555,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 2046785137}
   customerEndPoint: {fileID: 1353613717}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1537516894
@@ -9286,6 +9579,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1566366719}
   customerEndPoint: {fileID: 415169598}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1673668915
@@ -9560,6 +9857,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 0}
   customerEndPoint: {fileID: 0}
   customersUI: {fileID: 0}
+  messageMarkersUI: {fileID: 0}
+  messageMarkerPrefab: {fileID: 0}
+  lendMoneySprite: {fileID: 0}
+  angrySprite: {fileID: 0}
   customerVariants: []
 --- !u!212 &1696629758
 SpriteRenderer:
@@ -9880,6 +10181,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 0}
   customerEndPoint: {fileID: 0}
   customersUI: {fileID: 0}
+  messageMarkersUI: {fileID: 0}
+  messageMarkerPrefab: {fileID: 0}
+  lendMoneySprite: {fileID: 0}
+  angrySprite: {fileID: 0}
   customerVariants: []
 --- !u!1 &1832436358
 GameObject:
@@ -10378,6 +10683,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 1516180071}
   customerEndPoint: {fileID: 844522584}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1927731440
@@ -10484,6 +10793,10 @@ MonoBehaviour:
   customerSpawnPoint: {fileID: 179892315}
   customerEndPoint: {fileID: 495752413}
   customersUI: {fileID: 167324271}
+  messageMarkersUI: {fileID: 818988563}
+  messageMarkerPrefab: {fileID: 1283781542}
+  lendMoneySprite: {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
+  angrySprite: {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   customerVariants:
   - {fileID: 1312234318}
 --- !u!212 &1935335305

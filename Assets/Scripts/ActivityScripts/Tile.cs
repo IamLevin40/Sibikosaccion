@@ -11,6 +11,10 @@ public class Tile : MonoBehaviour
     public Transform customerSpawnPoint;
     public Transform customerEndPoint;
     public Transform customersUI;
+    public Transform messageMarkersUI;
+    public GameObject messageMarkerPrefab;
+    public Sprite lendMoneySprite;
+    public Sprite angrySprite;
     public GameObject[] customerVariants;
 
     private int customersRemaining;
@@ -62,5 +66,34 @@ public class Tile : MonoBehaviour
             Debug.Log($"Property: {tileData.tileName}, Revenue: {runtimePropertyData.revenue}");
             onCustomersFinished?.Invoke();
         }
+    }
+
+    public IEnumerator ProcessTax(Player player)
+    {
+        if (tileData.tileType != TileType.Property || runtimePropertyData == null || !runtimePropertyData.isBought) yield break;
+
+        GameObject marker = Instantiate(messageMarkerPrefab, messageMarkersUI);
+        marker.transform.position = propertyImage.transform.position + (Vector3.up * 0.5f);
+        Image markerImage = marker.transform.GetChild(0).GetComponent<Image>();
+
+        float maxTax = runtimePropertyData.reasonableTaxRate * 1.2f;
+        float angryChance = Mathf.Clamp01((runtimePropertyData.taxRate - runtimePropertyData.reasonableTaxRate) / (maxTax - runtimePropertyData.reasonableTaxRate));
+
+        if (Random.value < angryChance)
+        {
+            runtimePropertyData.isBought = false;
+            UpdatePropertyVisual();
+            markerImage.sprite = angrySprite;
+        }
+        else
+        {
+            float earnings = runtimePropertyData.revenue * (runtimePropertyData.taxRate / 100f);
+            player.budget += Mathf.RoundToInt(earnings);
+            player.UpdateBudgetUI();
+            markerImage.sprite = lendMoneySprite;
+        }
+
+        yield return new WaitForSeconds(1.5f);
+        Destroy(marker);
     }
 }

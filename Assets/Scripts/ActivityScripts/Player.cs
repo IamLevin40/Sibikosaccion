@@ -69,6 +69,11 @@ public class Player : MonoBehaviour
             }
             transform.position = targetPosition;
             yield return new WaitForSeconds(0.2f);
+
+            if (board.tiles[currentTileIndex].tileData.tileType == TileType.Start)
+            {
+                yield return StartCoroutine(ProcessAllProperties());
+            }
         }
         isMoving = false;
         
@@ -112,6 +117,7 @@ public class Player : MonoBehaviour
         {
             if (currentTile.runtimePropertyData.isBought)
             {
+                dice.rollButton.interactable = true;
                 UpdateEditPropertyVisual();
             }
             else
@@ -125,7 +131,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void UpdateBudgetUI()
+    private IEnumerator ProcessAllProperties()
+    {
+        foreach (Tile tile in board.tiles)
+        {
+            yield return new WaitForSeconds(0.2f);
+            StartCoroutine(tile.ProcessTax(this));
+        }
+        yield return new WaitForSeconds(1.5f);
+    }
+
+    public void UpdateBudgetUI()
     {
         budgetText.text = $"P {budget}";
     }
