@@ -4,18 +4,26 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
+    [Header("Tile Info")]
     public TileData tileData;
+
+    [Header("Property Info")]
     public PropertyData propertyData;
     [HideInInspector] public PropertyData runtimePropertyData;
     public SpriteRenderer propertyImage;
     public Transform customerSpawnPoint;
     public Transform customerEndPoint;
-    public Transform customersUI;
-    public Transform messageMarkersUI;
+    public Transform customersTransform;
+    public Transform messageMarkersTransform;
+    public Transform budgetItemTransform;
+    public Transform budgetTransform;
     public GameObject messageMarkerPrefab;
-    public Sprite lendMoneySprite;
-    public Sprite angrySprite;
     public GameObject[] customerVariants;
+    public Sprite[] messageTaxSprites;  // 0 - angry, 1 - lend_money
+    public Sprite budgetIcon;
+    public SpawnItemCollectionManager itemCollectionManager;
+
+    [Header("Mystery Info")]
 
     private int customersRemaining;
     private System.Action onCustomersFinished;
@@ -50,7 +58,7 @@ public class Tile : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             GameObject customerPrefab = customerVariants[Random.Range(0, customerVariants.Length)];
-            GameObject newCustomer = Instantiate(customerPrefab, customersUI);
+            GameObject newCustomer = Instantiate(customerPrefab, customersTransform);
             Vector3 spawnOffset = new Vector3(Random.Range(0f, 0.25f), Random.Range(0f, 0.25f), 0);
             newCustomer.transform.position = customerSpawnPoint.position + spawnOffset;
             newCustomer.GetComponent<Customer>().Initialize(this, customerEndPoint, OnCustomerExit);
@@ -72,9 +80,10 @@ public class Tile : MonoBehaviour
     {
         if (tileData.tileType != TileType.Property || runtimePropertyData == null || !runtimePropertyData.isBought) yield break;
 
-        GameObject marker = Instantiate(messageMarkerPrefab, messageMarkersUI);
+        GameObject marker = Instantiate(messageMarkerPrefab, messageMarkersTransform);
         marker.transform.position = propertyImage.transform.position + (Vector3.up * 0.5f);
         Image markerImage = marker.transform.GetChild(0).GetComponent<Image>();
+        Vector3 spawnPosition = propertyImage.transform.position;
 
         float maxTax = runtimePropertyData.reasonableTaxRate * 1.2f;
         float angryChance = Mathf.Clamp01((runtimePropertyData.taxRate - runtimePropertyData.reasonableTaxRate) / (maxTax - runtimePropertyData.reasonableTaxRate));
@@ -83,17 +92,33 @@ public class Tile : MonoBehaviour
         {
             runtimePropertyData.isBought = false;
             UpdatePropertyVisual();
-            markerImage.sprite = angrySprite;
+            markerImage.sprite = messageTaxSprites[0];
         }
         else
         {
             float earnings = runtimePropertyData.revenue * (runtimePropertyData.taxRate / 100f);
-            player.budget += Mathf.RoundToInt(earnings);
-            player.UpdateBudgetUI();
-            markerImage.sprite = lendMoneySprite;
+            markerImage.sprite = messageTaxSprites[1];
+
+            if (itemCollectionManager != null && budgetTransform != null && budgetIcon != null)
+            {
+                yield return StartCoroutine(AnimateBudgetCollection(player, earnings, spawnPosition));
+            }
+            else
+            {
+                player.budget += Mathf.RoundToInt(earnings);
+                player.UpdateBudgetUI();
+            }
         }
 
-        yield return new WaitForSeconds(1.5f);
         Destroy(marker);
+    }
+
+    private IEnumerator AnimateBudgetCollection(Player player, float earnings, Vector3 spawnPosition)
+    {
+        itemCollectionManager.Initialize(budgetIcon, budgetItemTransform, spawnPosition, budgetTransform.position);
+        yield return new WaitForSeconds(2f); 
+
+        player.budget += Mathf.RoundToInt(earnings);
+        player.UpdateBudgetUI();
     }
 }

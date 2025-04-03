@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(tile.ProcessTax(this));
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
     }
 
     public void UpdateBudgetUI()
