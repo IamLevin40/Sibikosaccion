@@ -33,7 +33,10 @@ public class Player : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject successUI;
     public EditProperty editPropertyUI;
+
+    [Header("Managers")]
     public SpawnItemCollectionManager itemCollectionManager;
+    public MysteryCardManager mysteryCardManager;
 
     private Tile currentTile;
     private int totalTilesWithCustomersRemaining;
@@ -47,6 +50,7 @@ public class Player : MonoBehaviour
     private void UpdateUI()
     {
         UpdateBudgetUI();
+        UpdateCorruptBarUI();
         buyPropertyUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => BuyProperty());
         buyPropertyUI.SetActive(false);
         insufficientFundsUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => OpenSellPropertyUI());
@@ -90,14 +94,25 @@ public class Player : MonoBehaviour
         }
         isMoving = false;
         
-        InitializeCustomers();
+        currentTile = board.tiles[currentTileIndex];
+        currentTile.tileData.OnLand(this);
+
+        if (board.tiles[currentTileIndex].tileData.tileType == TileType.Property)
+        {
+            InitializeCustomers();
+        }
+        else if (board.tiles[currentTileIndex].tileData.tileType == TileType.Mystery)
+        {
+            mysteryCardManager.ShowMysteryCards(this);
+        }
+        else
+        {
+            dice.rollButton.interactable = true;
+        }
     }
 
     private void InitializeCustomers()
     {
-        currentTile = board.tiles[currentTileIndex];
-        currentTile.tileData.OnLand(this);
-
         totalTilesWithCustomersRemaining = 0;
         List<Tile> boughtTiles = new List<Tile>();
         foreach (var tile in board.tiles)
@@ -275,7 +290,7 @@ public class Player : MonoBehaviour
     {
         corruptValue += value;
         corruptValue = Mathf.Clamp(corruptValue, 0, maxCorruptValue);
-        UpdateCorruptBar();
+        UpdateCorruptBarUI();
 
         if (corruptValue >= maxCorruptValue)
         {
@@ -287,10 +302,10 @@ public class Player : MonoBehaviour
     {
         corruptValue -= value;
         corruptValue = Mathf.Clamp(corruptValue, 0, maxCorruptValue);
-        UpdateCorruptBar();
+        UpdateCorruptBarUI();
     }
 
-    private void UpdateCorruptBar()
+    private void UpdateCorruptBarUI()
     {
         if (corruptBar != null)
         {

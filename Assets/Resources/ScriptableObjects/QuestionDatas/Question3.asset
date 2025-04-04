@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef97d4019c7b51146a00a3a52bf08543, type: 3}
+  m_Name: Question3
+  m_EditorClassIdentifier: 
+  question: Why is press freedom important in democracy, as the Philippine Constitution
+    guarantees it?
+  correctOption: It helps citizens stay informed and hold leaders accountable
+  incorrectOptions:
+  - News is allowed to be controlled by the government
+  - It makes sure that only good news is reported
+  - It allows fake news to spread freely and rapidly
