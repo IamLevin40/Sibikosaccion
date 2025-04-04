@@ -45,15 +45,15 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void SpawnCustomers(System.Action onComplete)
+    public void SpawnCustomers(Player player, System.Action onComplete)
     {
         int customerCount = Random.Range(runtimePropertyData.minCustomer, runtimePropertyData.maxCustomer + 1);
         customersRemaining = customerCount;
         onCustomersFinished = onComplete;
-        StartCoroutine(SpawnCustomerRoutine(customerCount));
+        StartCoroutine(SpawnCustomerRoutine(player, customerCount));
     }
 
-    private IEnumerator SpawnCustomerRoutine(int count)
+    private IEnumerator SpawnCustomerRoutine(Player player, int count)
     {
         for (int i = 0; i < count; i++)
         {
@@ -61,7 +61,7 @@ public class Tile : MonoBehaviour
             GameObject newCustomer = Instantiate(customerPrefab, customersTransform);
             Vector3 spawnOffset = new Vector3(Random.Range(0f, 0.25f), Random.Range(0f, 0.25f), 0);
             newCustomer.transform.position = customerSpawnPoint.position + spawnOffset;
-            newCustomer.GetComponent<Customer>().Initialize(this, customerEndPoint, OnCustomerExit);
+            newCustomer.GetComponent<Customer>().Initialize(player, this, customerEndPoint, OnCustomerExit);
             yield return new WaitForSeconds(Random.Range(0.25f, 5f / count));
         }
     }
@@ -78,7 +78,7 @@ public class Tile : MonoBehaviour
 
     public IEnumerator ProcessTax(Player player)
     {
-        if (tileData.tileType != TileType.Property || runtimePropertyData == null || !runtimePropertyData.isBought) yield break;
+        if (tileData.tileType != TileType.Property || runtimePropertyData == null || !runtimePropertyData.isBought || runtimePropertyData.revenue == 0) yield break;
 
         GameObject marker = Instantiate(messageMarkerPrefab, messageMarkersTransform);
         marker.transform.position = propertyImage.transform.position + (Vector3.up * 0.5f);
@@ -93,6 +93,8 @@ public class Tile : MonoBehaviour
             runtimePropertyData.isBought = false;
             UpdatePropertyVisual();
             markerImage.sprite = messageTaxSprites[0];
+
+            player.AddCorruptValue(5);
         }
         else
         {

@@ -5,13 +5,25 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement Info")]
     public DiceRoller dice;
     public int currentTileIndex = 0;
     public Board board;
     public bool isMoving = false;
     public int budget = 2500;
 
+    [Header("Corruption Info")]
+    public Slider corruptBar;
+    public Image corruptFillImage;
+    public Color[] corruptColors;   // 0 - low, 1 - mid, 2 - high
+    public int corruptValue = 0;
+    public int maxCorruptValue = 50;
+
+    [Header("UI Elements")]
     public Text budgetText;
+    public Sprite budgetIcon;
+    public Transform budgetItemTransform;
+    public Transform budgetTransform;
     public GameObject buyPropertyUI;
     public GameObject insufficientFundsUI;
     public GameObject sellPropertyUI;
@@ -21,6 +33,7 @@ public class Player : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject successUI;
     public EditProperty editPropertyUI;
+    public SpawnItemCollectionManager itemCollectionManager;
 
     private Tile currentTile;
     private int totalTilesWithCustomersRemaining;
@@ -104,7 +117,7 @@ public class Player : MonoBehaviour
 
         foreach (var tile in boughtTiles)
         {
-            tile.SpawnCustomers(OnCustomersFinished);
+            tile.SpawnCustomers(this, OnCustomersFinished);
         }
     }
 
@@ -219,22 +232,31 @@ public class Player : MonoBehaviour
             {
                 GameObject button = Instantiate(sellButtonPrefab, sellButtonParent);
                 button.transform.position = tile.propertyImage.transform.position;
-                button.GetComponent<Button>().onClick.AddListener(() => SellProperty(tile.runtimePropertyData));
+                button.GetComponent<Button>().onClick.AddListener(() => SellProperty(tile));
                 button.transform.GetChild(0).GetComponent<Text>().text = $"+P{Mathf.RoundToInt(tile.runtimePropertyData.purchaseCost * tile.runtimePropertyData.sellRate)}";
             }
         }
     }
 
-    public void SellProperty(PropertyData property)
+    public void SellProperty(Tile tile)
     {
-        budget += Mathf.RoundToInt(property.purchaseCost * property.sellRate);
-        UpdateBudgetUI();
+        StartCoroutine(AnimateBudgetCollection(tile.runtimePropertyData, tile.propertyImage.transform.position));
 
-        property.isBought = false;
+        tile.runtimePropertyData.revenue = 0;
+        tile.runtimePropertyData.isBought = false;
         UpdateAllPropertiesVisual();
         
         sellPropertyUI.SetActive(false);
         CheckPropertyPurchase();
+    }
+
+    private IEnumerator AnimateBudgetCollection(PropertyData property, Vector3 spawnPosition)
+    {
+        itemCollectionManager.Initialize(budgetIcon, budgetItemTransform, spawnPosition, budgetTransform.position);
+        yield return new WaitForSeconds(2f); 
+
+        budget += Mathf.RoundToInt(property.purchaseCost * property.sellRate);
+        UpdateBudgetUI();
     }
 
     private bool HasOwnedProperties()
@@ -247,6 +269,53 @@ public class Player : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void AddCorruptValue(int value)
+    {
+        corruptValue += value;
+        corruptValue = Mathf.Clamp(corruptValue, 0, maxCorruptValue);
+        UpdateCorruptBar();
+
+        if (corruptValue >= maxCorruptValue)
+        {
+            TriggerGameOver();
+        }
+    }
+
+    public void SubtractCorruptValue(int value)
+    {
+        corruptValue -= value;
+        corruptValue = Mathf.Clamp(corruptValue, 0, maxCorruptValue);
+        UpdateCorruptBar();
+    }
+
+    private void UpdateCorruptBar()
+    {
+        if (corruptBar != null)
+        {
+            float progress = (float)corruptValue / maxCorruptValue;
+            corruptBar.value = progress;
+
+            if (corruptFillImage != null)
+            {
+                Color lowColor = corruptColors[0];
+                Color midColor = corruptColors[1];
+                Color highColor = corruptColors[2];
+
+                Color lerpedColor;
+                if (progress < 0.5f)
+                {
+                    lerpedColor = Color.Lerp(lowColor, midColor, progress / 0.5f);
+                }
+                else
+                {
+                    lerpedColor = Color.Lerp(midColor, highColor, (progress - 0.5f) / 0.5f);
+                }
+
+                corruptFillImage.color = lerpedColor;
+            }
+        }
     }
 
     private void TriggerGameOver()

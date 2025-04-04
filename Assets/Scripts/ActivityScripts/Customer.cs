@@ -15,15 +15,15 @@ public class Customer : MonoBehaviour
     private Transform endPoint;
     private System.Action onExitComplete;
 
-    public void Initialize(Tile tile, Transform exitPoint, System.Action onComplete)
+    public void Initialize(Player player, Tile tile, Transform exitPoint, System.Action onComplete)
     {
         propertyTile = tile;
         endPoint = exitPoint;
         onExitComplete = onComplete;
-        StartCoroutine(MoveToProperty());
+        StartCoroutine(MoveToProperty(player));
     }
 
-    private IEnumerator MoveToProperty()
+    private IEnumerator MoveToProperty(Player player)
     {
         while (Vector3.Distance(transform.position, propertyTile.propertyImage.transform.position) > 0.1f)
         {
@@ -32,14 +32,14 @@ public class Customer : MonoBehaviour
         }
 
         image.enabled = false;
-        EvaluateProperty();
+        EvaluateProperty(player);
 
         yield return new WaitForSeconds(0.5f);
         image.enabled = true;
         StartCoroutine(MoveToExit());
     }
 
-    private void EvaluateProperty()
+    private void EvaluateProperty(Player player)
     {
         int price = propertyTile.runtimePropertyData.marketPrice;
         int reasonablePrice = propertyTile.runtimePropertyData.reasonableMarketPrice;
@@ -50,6 +50,7 @@ public class Customer : MonoBehaviour
         if (Random.value < angryChance)
         {
             emotion = Emotion.Angry;
+            player.AddCorruptValue(1);
         }
         else
         {
