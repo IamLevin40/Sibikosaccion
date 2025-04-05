@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     public bool hasSkipNextTax = false;
     public bool hasGhostEmployeeEffect = false;
     public int reducedRevenueTurns = 0;
-    
+
     private Tile currentTile;
     private int totalTilesWithCustomersRemaining;
 
