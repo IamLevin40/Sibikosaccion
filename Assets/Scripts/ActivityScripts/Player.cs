@@ -108,6 +108,8 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(ProcessAllProperties());
                 }
+
+                CheckForGameSuccess();
             }
         }
         isMoving = false;
@@ -379,10 +381,41 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void CheckForGameSuccess()
+    {
+        int ownedPropertyCount = 0;
+        int satisfiedPropertyCount = 0;
+
+        foreach (var tile in board.tiles)
+        {
+            var data = tile.runtimePropertyData;
+            if (data != null && data.isBought)
+            {
+                ownedPropertyCount++;
+
+                if (data.marketPrice <= data.reasonableMarketPrice &&
+                    data.taxRate <= data.reasonableTaxRate)
+                {
+                    satisfiedPropertyCount++;
+                }
+            }
+        }
+
+        if (ownedPropertyCount >= 13 && satisfiedPropertyCount >= 13)
+        {
+            TriggerGameSuccess();
+        }
+    }
+
     private void TriggerGameOver()
     {
         noMorePropertyUI.SetActive(false);
         insufficientFundsUI.SetActive(false);
         gameOverUI.SetActive(true);
+    }
+
+    private void TriggerGameSuccess()
+    {
+        successUI.SetActive(true);
     }
 }
