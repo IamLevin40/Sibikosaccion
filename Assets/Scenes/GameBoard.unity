@@ -421,16 +421,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 374403497}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &77487455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1550,6 +1546,7 @@ Transform:
   - {fileID: 147677799}
   - {fileID: 1493934511}
   - {fileID: 1394848339}
+  - {fileID: 944168141}
   m_Father: {fileID: 570844448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &201054538
@@ -2373,16 +2370,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 2036381772}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &302161953
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2911,7 +2904,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362239913
 MonoBehaviour:
@@ -3340,16 +3333,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1902842750}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &401519531
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4451,16 +4440,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 835526606}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &511196149
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4566,13 +4551,9 @@ MonoBehaviour:
   customerEndPoint: {fileID: 0}
   customersTransform: {fileID: 0}
   messageMarkersTransform: {fileID: 0}
-  budgetItemTransform: {fileID: 0}
-  budgetTransform: {fileID: 0}
   messageMarkerPrefab: {fileID: 0}
   customerVariants: []
   messageTaxSprites: []
-  budgetIcon: {fileID: 0}
-  itemCollectionManager: {fileID: 0}
 --- !u!212 &513075510
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4791,16 +4772,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 229986401}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &531521611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5651,16 +5628,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1283976924}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &774817341
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6321,6 +6294,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &866524835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 866524836}
+  - component: {fileID: 866524837}
+  m_Layer: 5
+  m_Name: GovernmentSpawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &866524836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866524835}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.5, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944168141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &866524837
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866524835}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &878789445
 GameObject:
   m_ObjectHideFlags: 0
@@ -6602,6 +6659,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &944168140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944168141}
+  m_Layer: 5
+  m_Name: Others
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &944168141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944168140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 866524836}
+  m_Father: {fileID: 201054537}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947212164
 GameObject:
   m_ObjectHideFlags: 0
@@ -7029,13 +7118,9 @@ MonoBehaviour:
   customerEndPoint: {fileID: 0}
   customersTransform: {fileID: 0}
   messageMarkersTransform: {fileID: 0}
-  budgetItemTransform: {fileID: 0}
-  budgetTransform: {fileID: 0}
   messageMarkerPrefab: {fileID: 0}
   customerVariants: []
   messageTaxSprites: []
-  budgetIcon: {fileID: 0}
-  itemCollectionManager: {fileID: 0}
 --- !u!212 &1075870200
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7142,11 +7227,16 @@ MonoBehaviour:
   - {fileID: 225807575}
   - {fileID: 1947608483}
   allCards:
-  - {fileID: 11400000, guid: ac0abdb3ba620554f84e693816b8e0fd, type: 2}
-  - {fileID: 11400000, guid: e13140d12a2ed9943a25e7150406979d, type: 2}
-  - {fileID: 11400000, guid: c465e736615be124f83ce082a75a817a, type: 2}
+  - {fileID: 11400000, guid: 9f615dc45b670aa449e969fceeb39192, type: 2}
+  - {fileID: 11400000, guid: 1d17e498778712a43aa21ea3a020cf62, type: 2}
+  - {fileID: 11400000, guid: a05878e090437f34787dade0d04d0c2f, type: 2}
+  - {fileID: 11400000, guid: db5fa3941cd4da84aba54d3c984fdc79, type: 2}
+  - {fileID: 11400000, guid: 7f16cd28545b1dc48a240fcc8b8d1345, type: 2}
   - {fileID: 11400000, guid: b1da438731f31c247b3753e58a121d28, type: 2}
   - {fileID: 11400000, guid: 3e0237430e0ecc542893bb3ddabcf57f, type: 2}
+  - {fileID: 11400000, guid: 27b8b3b87c75e094681c5d57e1067ded, type: 2}
+  - {fileID: 11400000, guid: d2af51cb6c5c0724d831ee146a7a141b, type: 2}
+  - {fileID: 11400000, guid: 295ed2e9abf100a4f865155c3955bd32, type: 2}
   cardDetailsUI: {fileID: 1480835760}
   selectedCardImage: {fileID: 405781897}
   selectedCardName: {fileID: 1862217248}
@@ -7601,16 +7691,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1768171396}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1108970133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7893,16 +7979,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 486092775}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1134377679
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8339,16 +8421,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1567345431}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1211055215
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9660,7 +9738,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370030646
 MonoBehaviour:
@@ -9686,9 +9764,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: df485a0eef78c1d4eac7196df39b90c8, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 32
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -10120,16 +10198,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 146293753}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1444538581
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10235,16 +10309,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 2063251084}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1460204113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10483,16 +10553,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1096067985}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1479435653
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10893,16 +10959,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 1353613717}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1537516894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11322,8 +11384,16 @@ MonoBehaviour:
   gameOverUI: {fileID: 1318831203}
   successUI: {fileID: 190396935}
   editPropertyUI: {fileID: 1881024809}
+  governmentSpawnPoint: {fileID: 866524836}
   itemCollectionManager: {fileID: 1643748273}
   mysteryCardManager: {fileID: 1084243889}
+  extraCustomerCount: 1
+  hasVolunteerInitiative: 0
+  hasYouthStartupAid: 0
+  hasBayanihanSpirit: 0
+  hasSkipNextTax: 0
+  hasGhostEmployeeEffect: 0
+  reducedRevenueTurns: 0
 --- !u!1 &1593854567
 GameObject:
   m_ObjectHideFlags: 0
@@ -12146,16 +12216,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 415169598}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1673668915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12429,13 +12495,9 @@ MonoBehaviour:
   customerEndPoint: {fileID: 0}
   customersTransform: {fileID: 0}
   messageMarkersTransform: {fileID: 0}
-  budgetItemTransform: {fileID: 0}
-  budgetTransform: {fileID: 0}
   messageMarkerPrefab: {fileID: 0}
   customerVariants: []
   messageTaxSprites: []
-  budgetIcon: {fileID: 0}
-  itemCollectionManager: {fileID: 0}
 --- !u!212 &1696629758
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12876,13 +12938,9 @@ MonoBehaviour:
   customerEndPoint: {fileID: 0}
   customersTransform: {fileID: 0}
   messageMarkersTransform: {fileID: 0}
-  budgetItemTransform: {fileID: 0}
-  budgetTransform: {fileID: 0}
   messageMarkerPrefab: {fileID: 0}
   customerVariants: []
   messageTaxSprites: []
-  budgetIcon: {fileID: 0}
-  itemCollectionManager: {fileID: 0}
 --- !u!1 &1832436358
 GameObject:
   m_ObjectHideFlags: 0
@@ -13576,16 +13634,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 844522584}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1927731440
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13691,16 +13745,12 @@ MonoBehaviour:
   customerEndPoint: {fileID: 495752413}
   customersTransform: {fileID: 167324271}
   messageMarkersTransform: {fileID: 818988563}
-  budgetItemTransform: {fileID: 230334478}
-  budgetTransform: {fileID: 444148483}
   messageMarkerPrefab: {fileID: 1283781542}
   customerVariants:
   - {fileID: 1312234318}
   messageTaxSprites:
   - {fileID: 21300000, guid: c69df3f7205fde649abeece33f77b2c5, type: 3}
   - {fileID: 21300000, guid: 2f0df8f49b3b2a046b116a4ce87255fa, type: 3}
-  budgetIcon: {fileID: 21300000, guid: b1c09733ed5ebe740aa56fdcbe85ce4b, type: 3}
-  itemCollectionManager: {fileID: 1643748273}
 --- !u!212 &1935335305
 SpriteRenderer:
   m_ObjectHideFlags: 0

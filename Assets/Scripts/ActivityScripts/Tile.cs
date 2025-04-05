@@ -15,13 +15,9 @@ public class Tile : MonoBehaviour
     public Transform customerEndPoint;
     public Transform customersTransform;
     public Transform messageMarkersTransform;
-    public Transform budgetItemTransform;
-    public Transform budgetTransform;
     public GameObject messageMarkerPrefab;
     public GameObject[] customerVariants;
     public Sprite[] messageTaxSprites;  // 0 - angry, 1 - lend_money
-    public Sprite budgetIcon;
-    public SpawnItemCollectionManager itemCollectionManager;
 
     [Header("Mystery Info")]
 
@@ -45,9 +41,25 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void SpawnCustomers(Player player, System.Action onComplete)
+    public void SpawnCustomers(Player player, int extraCustomer, System.Action onComplete)
     {
-        int customerCount = Random.Range(runtimePropertyData.minCustomer, runtimePropertyData.maxCustomer + 1);
+        int maxCustomerCount = 0;
+        
+        if (runtimePropertyData.isCursedByLandGrab)
+        {
+            runtimePropertyData.maxCustomer--;
+            if (maxCustomerCount <= runtimePropertyData.minCustomer)
+            {
+                runtimePropertyData.isCursedByLandGrab = false;
+                runtimePropertyData.isBought = false;
+                UpdatePropertyVisual();
+
+                runtimePropertyData.maxCustomer = propertyData.maxCustomer;
+                return;
+            }
+        }
+        
+        int customerCount = Random.Range(runtimePropertyData.minCustomer, maxCustomerCount + 1) + extraCustomer;
         customersRemaining = customerCount;
         onCustomersFinished = onComplete;
         StartCoroutine(SpawnCustomerRoutine(player, customerCount));
@@ -90,37 +102,28 @@ public class Tile : MonoBehaviour
 
         if (Random.value < angryChance)
         {
+            markerImage.sprite = messageTaxSprites[0];
             runtimePropertyData.isBought = false;
             UpdatePropertyVisual();
-            markerImage.sprite = messageTaxSprites[0];
 
             player.AddCorruptValue(5);
         }
         else
         {
-            float earnings = runtimePropertyData.revenue * (runtimePropertyData.taxRate / 100f);
             markerImage.sprite = messageTaxSprites[1];
+            int totalTaxRate = runtimePropertyData.taxRate + (player.hasBayanihanSpirit ? 5 : 0);
+            float earnings = runtimePropertyData.revenue * (totalTaxRate / 100f);
 
-            if (itemCollectionManager != null && budgetTransform != null && budgetIcon != null)
+            if (player.hasGhostEmployeeEffect && runtimePropertyData.taxRate > 10f)
             {
-                yield return StartCoroutine(AnimateBudgetCollection(player, earnings, spawnPosition));
+                earnings *= 0.75f;
             }
-            else
-            {
-                player.budget += Mathf.RoundToInt(earnings);
-                player.UpdateBudgetUI();
-            }
+
+            yield return StartCoroutine(player.BudgetCollection(earnings, spawnPosition));
         }
 
+        runtimePropertyData.revenue = 0;
+        player.hasBayanihanSpirit = false;
         Destroy(marker);
-    }
-
-    private IEnumerator AnimateBudgetCollection(Player player, float earnings, Vector3 spawnPosition)
-    {
-        itemCollectionManager.Initialize(budgetIcon, budgetItemTransform, spawnPosition, budgetTransform.position);
-        yield return new WaitForSeconds(2f); 
-
-        player.budget += Mathf.RoundToInt(earnings);
-        player.UpdateBudgetUI();
     }
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02fa363033af674bbdbd0df1b07f155, type: 3}
-  m_Name: '[NC] Marketing Boost'
+  m_Name: '[C] Ghost Employees'
   m_EditorClassIdentifier: 
-  cardName: Marketing Boost
-  description: Obtain P 250 for your budget (for testing purposes only)
-  image: {fileID: 21300000, guid: 9d4a76e264ae56c4c9159f489581882d, type: 3}
-  cardType: 1
+  cardName: Ghost Employees
+  description: Allocate a budget for fake workers and secretly stash the money. Gain
+    P 2500 but properties with tax rates over 10% generate 25% less earnings permanently.
+  image: {fileID: 21300000, guid: 22aef5f995485ef40b513a463fc497f9, type: 3}
+  cardType: 0

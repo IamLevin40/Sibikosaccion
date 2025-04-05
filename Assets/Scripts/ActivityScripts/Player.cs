@@ -33,11 +33,21 @@ public class Player : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject successUI;
     public EditProperty editPropertyUI;
+    public Transform governmentSpawnPoint;
 
     [Header("Managers")]
     public SpawnItemCollectionManager itemCollectionManager;
     public MysteryCardManager mysteryCardManager;
 
+    [Header("Player Info")]
+    public int extraCustomerCount = 1;
+    public bool hasVolunteerInitiative = false;
+    public bool hasYouthStartupAid = false;
+    public bool hasBayanihanSpirit = false;
+    public bool hasSkipNextTax = false;
+    public bool hasGhostEmployeeEffect = false;
+    public int reducedRevenueTurns = 0;
+    
     private Tile currentTile;
     private int totalTilesWithCustomersRemaining;
 
@@ -89,7 +99,15 @@ public class Player : MonoBehaviour
 
             if (board.tiles[currentTileIndex].tileData.tileType == TileType.Start)
             {
-                yield return StartCoroutine(ProcessAllProperties());
+                if (hasSkipNextTax)
+                {
+                    hasSkipNextTax = false;
+                    Debug.Log("Cash Overflow effect active... skipping tax collection.");
+                }
+                else
+                {
+                    yield return StartCoroutine(ProcessAllProperties());
+                }
             }
         }
         isMoving = false;
@@ -132,8 +150,9 @@ public class Player : MonoBehaviour
 
         foreach (var tile in boughtTiles)
         {
-            tile.SpawnCustomers(this, OnCustomersFinished);
+            tile.SpawnCustomers(this, (hasVolunteerInitiative) ? extraCustomerCount : 0, OnCustomersFinished);
         }
+        hasVolunteerInitiative = false;
     }
 
     private void OnCustomersFinished()
@@ -195,7 +214,17 @@ public class Player : MonoBehaviour
             buyPropertyUI.SetActive(true);
             buyPropertyUI.transform.GetChild(0).GetComponent<Text>().text = currentTile.tileData.tileName;
             buyPropertyUI.transform.GetChild(1).GetComponent<Image>().sprite = currentTile.tileData.tileLogoSprite;
-            buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {currentTile.runtimePropertyData.purchaseCost}";
+
+            int price = currentTile.runtimePropertyData.purchaseCost;
+            if (hasYouthStartupAid)
+            {
+                price /= 2;
+                buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {price} (50% OFF)";
+            }
+            else
+            {
+                buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {price}";
+            }
         }
         else
         {
@@ -216,7 +245,14 @@ public class Player : MonoBehaviour
 
     public void BuyProperty()
     {
-        budget -= currentTile.runtimePropertyData.purchaseCost;
+        int price = currentTile.runtimePropertyData.purchaseCost;
+        if (hasYouthStartupAid)
+        {
+            price /= 2;
+            hasYouthStartupAid = false;
+        }
+        
+        budget -= price;
         UpdateBudgetUI();
         
         currentTile.runtimePropertyData.isBought = true;
@@ -247,15 +283,20 @@ public class Player : MonoBehaviour
             {
                 GameObject button = Instantiate(sellButtonPrefab, sellButtonParent);
                 button.transform.position = tile.propertyImage.transform.position;
-                button.GetComponent<Button>().onClick.AddListener(() => SellProperty(tile));
+                button.GetComponent<Button>().onClick.AddListener(() => StartCoroutine(SellProperty(tile)));
                 button.transform.GetChild(0).GetComponent<Text>().text = $"+P{Mathf.RoundToInt(tile.runtimePropertyData.purchaseCost * tile.runtimePropertyData.sellRate)}";
             }
         }
     }
 
-    public void SellProperty(Tile tile)
+    public IEnumerator SellProperty(Tile tile)
     {
-        StartCoroutine(AnimateBudgetCollection(tile.runtimePropertyData, tile.propertyImage.transform.position));
+        foreach (Transform child in sellButtonParent)
+        {
+            Destroy(child.gameObject);
+        }
+        int earnings = Mathf.RoundToInt(tile.runtimePropertyData.purchaseCost * tile.runtimePropertyData.sellRate);
+        yield return StartCoroutine(BudgetCollection(earnings, tile.propertyImage.transform.position));
 
         tile.runtimePropertyData.revenue = 0;
         tile.runtimePropertyData.isBought = false;
@@ -265,12 +306,17 @@ public class Player : MonoBehaviour
         CheckPropertyPurchase();
     }
 
-    private IEnumerator AnimateBudgetCollection(PropertyData property, Vector3 spawnPosition)
+    public void GetBudgetFromGovernment(int amount)
+    {
+        StartCoroutine(BudgetCollection(amount, governmentSpawnPoint.position));
+    }
+
+    public IEnumerator BudgetCollection(float earnings, Vector3 spawnPosition)
     {
         itemCollectionManager.Initialize(budgetIcon, budgetItemTransform, spawnPosition, budgetTransform.position);
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(2f);
 
-        budget += Mathf.RoundToInt(property.purchaseCost * property.sellRate);
+        budget += Mathf.RoundToInt(earnings);
         UpdateBudgetUI();
     }
 

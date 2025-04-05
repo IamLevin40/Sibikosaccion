@@ -41,8 +41,9 @@ public class Customer : MonoBehaviour
 
     private void EvaluateProperty(Player player)
     {
-        int price = propertyTile.runtimePropertyData.marketPrice;
-        int reasonablePrice = propertyTile.runtimePropertyData.reasonableMarketPrice;
+        PropertyData property = propertyTile.runtimePropertyData;
+        int price = property.marketPrice;
+        int reasonablePrice = property.reasonableMarketPrice;
         float maxPrice = reasonablePrice * 1.2f;
         
         float angryChance = Mathf.Clamp01((price - reasonablePrice) / (maxPrice - reasonablePrice));
@@ -55,7 +56,21 @@ public class Customer : MonoBehaviour
         else
         {
             emotion = Emotion.Love;
-            propertyTile.runtimePropertyData.revenue += price;
+            int priceIncrease = 0;
+
+            if (player.reducedRevenueTurns > 0)
+            {
+                price = Mathf.RoundToInt(price * 0.9f);
+                player.reducedRevenueTurns--;
+            }
+
+            if (property.hasPermanentPriceIncrease)
+            {
+                priceIncrease = Mathf.RoundToInt(price * ((float)property.permanentPriceIncreaseRate / 100f));
+                Debug.Log($"Price increase by {priceIncrease} for the property {propertyTile.tileData.tileName}.");
+            }
+            
+            property.revenue += price + priceIncrease;
         }
         UpdateEmotionVisual();
     }

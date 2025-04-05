@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02fa363033af674bbdbd0df1b07f155, type: 3}
-  m_Name: '[C] Bribe Collector 3'
+  m_Name: '[C] Personal Expenditures'
   m_EditorClassIdentifier: 
-  cardName: Bribe Collector 3
-  description: Add corrupt value by 10 points (for testing purposes only)
+  cardName: Personal Expenditures
+  description: Stash P 1000 of government funds for personal use, but all owned properties
+    earn 10% less in revenue for the next 4 rolls.
   image: {fileID: 21300000, guid: 22aef5f995485ef40b513a463fc497f9, type: 3}
   cardType: 0

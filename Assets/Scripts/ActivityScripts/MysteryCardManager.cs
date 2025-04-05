@@ -49,7 +49,7 @@ public class MysteryCardManager : MonoBehaviour
         {
             if (currentlySelectedCard != null)
             {
-                currentlySelectedCard.ActivateEffect(currentPlayer);
+                currentlySelectedCard.ActivateEffect(currentPlayer, this);
                 cardSelectionUI.SetActive(false);
                 cardDetailsUI.SetActive(false);
                 rerollButton.gameObject.SetActive(false);
