@@ -9,7 +9,8 @@ public class MysteryCardData : ScriptableObject
 {
     public string cardName;
     public string description;
-    public Sprite image;
+    public Sprite frontImage;
+    public Sprite backImage;
     public CardType cardType;
 
     public void ActivateEffect(Player player, MonoBehaviour caller)

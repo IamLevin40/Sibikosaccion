@@ -105,7 +105,7 @@ public class DiceRoller : MonoBehaviour
         }
 
         // Final result
-        int finalFace = Random.Range(0, diceFaces.Length);
+        int finalFace = currentFace;
         diceImage.sprite = diceFaces[finalFace];
 
         yield return new WaitForSeconds(1f);

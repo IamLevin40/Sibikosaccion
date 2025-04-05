@@ -15,5 +15,6 @@ MonoBehaviour:
   cardName: Infrastructure Investment
   description: Permanently increase the market price for one randomly selected property
     by 10%. It does not affect the customer satisfaction based on the market price.
-  image: {fileID: 21300000, guid: 9d4a76e264ae56c4c9159f489581882d, type: 3}
+  frontImage: {fileID: 21300000, guid: 9d4a76e264ae56c4c9159f489581882d, type: 3}
+  backImage: {fileID: 21300000, guid: 7824801ec00f84140ab39075044a5c34, type: 3}
   cardType: 1

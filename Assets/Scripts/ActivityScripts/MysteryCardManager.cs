@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class MysteryCardManager : MonoBehaviour
     private MysteryCardData[] drawnCards = new MysteryCardData[3];
     private MysteryCardData currentlySelectedCard;
     private bool hasRerolled = false;
+    private int currentlyFlippedIndex = -1;
+    private bool isAnimating = false;
 
     public void ShowMysteryCards(Player player)
     {
@@ -93,10 +96,90 @@ public class MysteryCardManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             int index = i;
-            cardImages[i].sprite = drawnCards[i].image;
+            cardImages[i].sprite = drawnCards[i].backImage;
             cardButtons[i].onClick.RemoveAllListeners();
-            cardButtons[i].onClick.AddListener(() => PreviewCard(index));
+            cardButtons[i].onClick.AddListener(() => {
+                if (!isAnimating) StartCoroutine(FlipCard(index));
+            });
         }
+    }
+
+    private IEnumerator FlipCard(int index)
+    {
+        isAnimating = true;
+        cardDetailsUI.SetActive(false);
+
+        // If another card is selected, flip it back and hide the preview
+        if (currentlyFlippedIndex != -1 && currentlyFlippedIndex != index)
+        {
+            yield return StartCoroutine(FlipBackCard(currentlyFlippedIndex));
+        }
+
+        GameObject cardObj = cardImages[index].transform.parent.gameObject;
+        Image cardImg = cardImages[index];
+
+        float duration = 0.3f;
+        float time = 0f;
+
+        // Rotate from 0 to 90
+        while (time < duration)
+        {
+            float yRot = Mathf.Lerp(0f, 90f, time / duration);
+            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // Swap image to front
+        cardImg.sprite = drawnCards[index].frontImage;
+
+        // Rotate back from 90 to 0
+        time = 0f;
+        while (time < duration)
+        {
+            float yRot = Mathf.Lerp(90f, 0f, time / duration);
+            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        currentlyFlippedIndex = index;
+        PreviewCard(index);
+
+        isAnimating = false;
+    }
+
+    private IEnumerator FlipBackCard(int index)
+    {
+        GameObject cardObj = cardImages[index].transform.parent.gameObject;
+        Image cardImg = cardImages[index];
+
+        float duration = 0.3f;
+        float time = 0f;
+
+        // Rotate from 0 to 90
+        while (time < duration)
+        {
+            float yRot = Mathf.Lerp(0f, 90f, time / duration);
+            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // Swap image to back
+        cardImg.sprite = drawnCards[index].backImage;
+
+        // Rotate back from 90 to 0
+        time = 0f;
+        while (time < duration)
+        {
+            float yRot = Mathf.Lerp(90f, 0f, time / duration);
+            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        currentlyFlippedIndex = -1;
     }
 
     private void PreviewCard(int index)
@@ -104,7 +187,7 @@ public class MysteryCardManager : MonoBehaviour
         cardDetailsUI.SetActive(true);
         currentlySelectedCard = drawnCards[index];
 
-        selectedCardImage.sprite = currentlySelectedCard.image;
+        selectedCardImage.sprite = currentlySelectedCard.frontImage;
         selectedCardName.text = currentlySelectedCard.cardName;
         selectedCardDescription.text = currentlySelectedCard.description;
     }
