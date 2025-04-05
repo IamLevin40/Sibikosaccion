@@ -128,6 +128,7 @@ public class Player : MonoBehaviour
         else
         {
             dice.rollButton.interactable = true;
+            dice.rollText.SetActive(true);
         }
     }
 
@@ -167,6 +168,7 @@ public class Player : MonoBehaviour
             if (currentTile.runtimePropertyData.isBought)
             {
                 dice.rollButton.interactable = true;
+                dice.rollText.SetActive(true);
                 UpdateEditPropertyVisual();
             }
             else
@@ -177,6 +179,7 @@ public class Player : MonoBehaviour
         else
         {
             dice.rollButton.interactable = true;
+            dice.rollText.SetActive(true);
         }
     }
 
@@ -260,8 +263,10 @@ public class Player : MonoBehaviour
         currentTile.runtimePropertyData.isBought = true;
         currentTile.UpdatePropertyVisual();
         buyPropertyUI.SetActive(false);
-        dice.rollButton.interactable = true;
         UpdateEditPropertyVisual();
+
+        dice.rollButton.interactable = true;
+        dice.rollText.SetActive(true);
 
         Debug.Log($"{name} bought {currentTile.tileData.tileName} for {currentTile.runtimePropertyData.purchaseCost}. Remaining budget: {budget}");
     }
