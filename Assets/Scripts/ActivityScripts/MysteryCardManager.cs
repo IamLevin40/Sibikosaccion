@@ -115,6 +115,8 @@ public class MysteryCardManager : MonoBehaviour
 
         QuestionData question = allQuestions[Random.Range(0, allQuestions.Count)];
 
+        cardSelectionUI.SetActive(false);
+        cardDetailsUI.SetActive(false);
         questionsUI.SetActive(true);
         questionText.text = question.question;
 
@@ -140,6 +142,7 @@ public class MysteryCardManager : MonoBehaviour
                 optionButtons[i].onClick.AddListener(() =>
                 {
                     questionsUI.SetActive(false);
+                    cardSelectionUI.SetActive(true);
                     DrawUniqueCards(initialDraw: false);
                     hasRerolled = true;
                 });

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef97d4019c7b51146a00a3a52bf08543, type: 3}
+  m_Name: Question46
+  m_EditorClassIdentifier: 
+  question: Why is ensuring voter privacy important in democratic elections?
+  correctOption: It guarantees that each voter can cast their vote without coercion
+    or fear of retribution
+  incorrectOptions:
+  - It ensures that only certain groups can participate
+  - It makes the election process easier to manipulate
+  - It limits transparency in elections

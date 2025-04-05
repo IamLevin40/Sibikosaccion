@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef97d4019c7b51146a00a3a52bf08543, type: 3}
+  m_Name: Question48
+  m_EditorClassIdentifier: 
+  question: How does providing multi-language ballots improve accessibility for non-native
+    speakers?
+  correctOption: It allows voters to understand the ballot and make an informed choice
+  incorrectOptions:
+  - It limits voter participation to certain groups
+  - It makes the voting process more complicated
+  - It reduces the accessibility of election information

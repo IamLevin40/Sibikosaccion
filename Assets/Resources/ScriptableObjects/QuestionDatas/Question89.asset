@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef97d4019c7b51146a00a3a52bf08543, type: 3}
+  m_Name: Question89
+  m_EditorClassIdentifier: 
+  question: How does the transparency of campaign donations affect electoral integrity?
+  correctOption: It ensures that voters know where a candidate's funding comes from
+    and if they have conflicts of interest
+  incorrectOptions:
+  - It encourages voters to ignore financial information
+  - It restricts political campaigns to a few wealthy candidates
+  - It increases corruption in political campaigns
