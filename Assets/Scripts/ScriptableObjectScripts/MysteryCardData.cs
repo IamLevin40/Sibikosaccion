@@ -133,7 +133,7 @@ public class MysteryCardData : ScriptableObject
         {
             Tile selectedTile = availableProperties[Random.Range(0, availableProperties.Count)];
 
-            float refundAmount = selectedTile.runtimePropertyData.marketPrice * 1.5f;
+            float refundAmount = selectedTile.runtimePropertyData.purchaseCost * 1.5f;
             caller.StartCoroutine(player.BudgetCollection(refundAmount, selectedTile.propertyImage.transform.position));
 
             selectedTile.runtimePropertyData.isBought = false;

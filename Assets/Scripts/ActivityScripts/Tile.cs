@@ -48,15 +48,31 @@ public class Tile : MonoBehaviour
         if (runtimePropertyData.isCursedByLandGrab)
         {
             runtimePropertyData.maxCustomer--;
-            if (maxCustomerCount <= runtimePropertyData.minCustomer)
+            if (runtimePropertyData.maxCustomer <= runtimePropertyData.minCustomer)
             {
                 runtimePropertyData.isCursedByLandGrab = false;
                 runtimePropertyData.isBought = false;
                 UpdatePropertyVisual();
 
+                runtimePropertyData.marketPrice = propertyData.marketPrice;
+                runtimePropertyData.taxRate = propertyData.taxRate;
                 runtimePropertyData.maxCustomer = propertyData.maxCustomer;
+
+                if (player.currentTileIndex == System.Array.IndexOf(player.board.tiles, this))
+                {
+                    player.ActivateDice();
+                }
+
                 return;
             }
+            else
+            {
+                maxCustomerCount = runtimePropertyData.maxCustomer;
+            }
+        }
+        else
+        {
+            maxCustomerCount = runtimePropertyData.maxCustomer;
         }
         
         int customerCount = Random.Range(runtimePropertyData.minCustomer, maxCustomerCount + 1) + extraCustomer;

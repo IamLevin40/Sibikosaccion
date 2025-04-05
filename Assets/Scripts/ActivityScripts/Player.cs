@@ -74,6 +74,12 @@ public class Player : MonoBehaviour
         editPropertyUI.gameObject.SetActive(false);
     }
 
+    public void ActivateDice()
+    {
+        dice.rollButton.interactable = true;
+        dice.rollText.SetActive(true);
+    }
+
     public void Move(int steps)
     {
         if (!isMoving)
@@ -127,8 +133,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            dice.rollButton.interactable = true;
-            dice.rollText.SetActive(true);
+            ActivateDice();
         }
     }
 
@@ -167,8 +172,7 @@ public class Player : MonoBehaviour
         {
             if (currentTile.runtimePropertyData.isBought)
             {
-                dice.rollButton.interactable = true;
-                dice.rollText.SetActive(true);
+                ActivateDice();
                 UpdateEditPropertyVisual();
             }
             else
@@ -178,8 +182,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            dice.rollButton.interactable = true;
-            dice.rollText.SetActive(true);
+            ActivateDice();
         }
     }
 
@@ -187,6 +190,8 @@ public class Player : MonoBehaviour
     {
         foreach (Tile tile in board.tiles)
         {
+            if (tile.runtimePropertyData == null || !tile.runtimePropertyData.isBought) continue;
+            
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(tile.ProcessTax(this));
         }
@@ -265,8 +270,7 @@ public class Player : MonoBehaviour
         buyPropertyUI.SetActive(false);
         UpdateEditPropertyVisual();
 
-        dice.rollButton.interactable = true;
-        dice.rollText.SetActive(true);
+        ActivateDice();
 
         Debug.Log($"{name} bought {currentTile.tileData.tileName} for {currentTile.runtimePropertyData.purchaseCost}. Remaining budget: {budget}");
     }
