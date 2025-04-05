@@ -24,6 +24,9 @@ public class MysteryCardManager : MonoBehaviour
     public GameObject questionsUI;
     public Text questionText;
     public Button[] optionButtons;
+    public GameObject questionMessageUI;
+    public GameObject correctMessage;
+    public GameObject incorrectMessage;
     public List<QuestionData> allQuestions;
 
     private Player currentPlayer;
@@ -115,8 +118,8 @@ public class MysteryCardManager : MonoBehaviour
             yield return StartCoroutine(FlipBackCard(currentlyFlippedIndex));
         }
 
-        GameObject cardObj = cardImages[index].transform.parent.gameObject;
-        Image cardImg = cardImages[index];
+        GameObject cardObject = cardImages[index].transform.parent.gameObject;
+        Image cardImage = cardImages[index];
 
         float duration = 0.3f;
         float time = 0f;
@@ -125,20 +128,20 @@ public class MysteryCardManager : MonoBehaviour
         while (time < duration)
         {
             float yRot = Mathf.Lerp(0f, 90f, time / duration);
-            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }
 
         // Swap image to front
-        cardImg.sprite = drawnCards[index].frontImage;
+        cardImage.sprite = drawnCards[index].frontImage;
 
         // Rotate back from 90 to 0
         time = 0f;
         while (time < duration)
         {
             float yRot = Mathf.Lerp(90f, 0f, time / duration);
-            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }
@@ -151,8 +154,8 @@ public class MysteryCardManager : MonoBehaviour
 
     private IEnumerator FlipBackCard(int index)
     {
-        GameObject cardObj = cardImages[index].transform.parent.gameObject;
-        Image cardImg = cardImages[index];
+        GameObject cardObject = cardImages[index].transform.parent.gameObject;
+        Image cardImage = cardImages[index];
 
         float duration = 0.3f;
         float time = 0f;
@@ -161,20 +164,20 @@ public class MysteryCardManager : MonoBehaviour
         while (time < duration)
         {
             float yRot = Mathf.Lerp(0f, 90f, time / duration);
-            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }
 
         // Swap image to back
-        cardImg.sprite = drawnCards[index].backImage;
+        cardImage.sprite = drawnCards[index].backImage;
 
         // Rotate back from 90 to 0
         time = 0f;
         while (time < duration)
         {
             float yRot = Mathf.Lerp(90f, 0f, time / duration);
-            cardObj.transform.rotation = Quaternion.Euler(0, yRot, cardObj.transform.eulerAngles.z);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }
@@ -200,6 +203,8 @@ public class MysteryCardManager : MonoBehaviour
 
         cardSelectionUI.SetActive(false);
         cardDetailsUI.SetActive(false);
+        currentlyFlippedIndex = -1;
+
         questionsUI.SetActive(true);
         questionText.text = question.question;
 
@@ -228,6 +233,7 @@ public class MysteryCardManager : MonoBehaviour
                     cardSelectionUI.SetActive(true);
                     DrawUniqueCards(initialDraw: false);
                     hasRerolled = true;
+                    StartCoroutine(DisplayQuestionMessage(true));
                 });
             }
             else
@@ -239,8 +245,21 @@ public class MysteryCardManager : MonoBehaviour
                     cardDetailsUI.SetActive(false);
                     rerollButton.gameObject.SetActive(false);
                     currentPlayer.dice.rollButton.interactable = true;
+                    StartCoroutine(DisplayQuestionMessage(false));
                 });
             }
         }
+    }
+
+    private IEnumerator DisplayQuestionMessage(bool isCorrect)
+    {
+        questionMessageUI.SetActive(true);
+        correctMessage.SetActive(isCorrect);
+        incorrectMessage.SetActive(!isCorrect);
+
+        yield return new WaitForSeconds(2f);
+        questionMessageUI.SetActive(false);
+        correctMessage.SetActive(false);
+        incorrectMessage.SetActive(false);
     }
 }
