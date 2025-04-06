@@ -14013,10 +14013,10 @@ MonoBehaviour:
   diceTransform: {fileID: 1593854568}
   startPosition: {fileID: 1716877024}
   rollArea: {fileID: 1086218497}
-  minLaunchSpeed: 200
-  maxLaunchSpeed: 300
-  damping: 0.98
-  slowDamping: 0.7
+  minLaunchSpeed: 100
+  maxLaunchSpeed: 150
+  damping: 0.95
+  slowDamping: 0.75
   stopThreshold: 0.1
 --- !u!1 &1594880815
 GameObject:

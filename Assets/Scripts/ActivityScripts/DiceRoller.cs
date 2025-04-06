@@ -164,7 +164,7 @@ public class DiceRoller : MonoBehaviour
         Vector3 target = GetCenterOfRect(rollArea);
         Quaternion targetRotation = Quaternion.identity;
 
-        float duration = 0.1f;
+        float duration = 0.2f;
         float timer = 0f;
 
         while (timer < duration)

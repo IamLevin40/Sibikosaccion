@@ -26,6 +26,7 @@ public class GeneralManager : MonoBehaviour
     {
         // Set the application as running in background, and the time scale should be in normal state
         Application.runInBackground = true;
+        Application.targetFrameRate = 60;
         Time.timeScale = 1.0f;
     }
 
