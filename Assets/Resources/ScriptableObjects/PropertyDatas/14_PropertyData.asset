@@ -15,8 +15,8 @@ MonoBehaviour:
   isBought: 0
   purchaseCost: 725
   sellRate: 0.8
-  abandonSprite: {fileID: 21300000, guid: 99b7e9137befc024ba05a7358a0934e0, type: 3}
-  boughtSprite: {fileID: 21300000, guid: 6e0f71d091c73a84a8dc6ff02e2cadc1, type: 3}
+  abandonSprite: {fileID: 21300000, guid: 191f31dd38bc3ba439d9f1a4f0a7d5db, type: 3}
+  boughtSprite: {fileID: 21300000, guid: aba932973921b8649adc7dbdce7729b1, type: 3}
   marketPrice: 120
   reasonableMarketPrice: 220
   taxRate: 8
@@ -24,3 +24,6 @@ MonoBehaviour:
   revenue: 0
   minCustomer: 1
   maxCustomer: 4
+  permanentPriceIncreaseRate: 10
+  hasPermanentPriceIncrease: 0
+  isCursedByLandGrab: 0
