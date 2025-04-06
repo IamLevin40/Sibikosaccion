@@ -109,6 +109,14 @@ public class Player : MonoBehaviour
                 if (hasSkipNextTax)
                 {
                     hasSkipNextTax = false;
+                    foreach (var tile in board.tiles)
+                    {
+                        var data = tile.runtimePropertyData;
+                        if (data != null && data.isBought)
+                        {
+                            visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_no_tax", 2.5f, tile.propertyImage.transform.position);
+                        }
+                    }
                     Debug.Log("Cash Overflow effect active... skipping tax collection.");
                 }
                 else

@@ -62,6 +62,7 @@ public class Customer : MonoBehaviour
             {
                 price = Mathf.RoundToInt(price * 0.9f);
                 player.reducedRevenueTurns--;
+                player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_reduce_revenue", 1f, propertyTile.propertyImage.transform.position);
             }
 
             if (property.hasPermanentPriceIncrease)
