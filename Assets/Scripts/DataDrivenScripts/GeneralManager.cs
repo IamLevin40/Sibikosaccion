@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GeneralManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GeneralManager : MonoBehaviour
     [SerializeField] private DefaultPlayerData defaultPlayerData;
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private Button directPlayButton;
     [SerializeField] private Button directResetButton;
     [SerializeField] private Button directQuitButton;
     
@@ -35,6 +37,7 @@ public class GeneralManager : MonoBehaviour
 
     private void PrepareObjectListeners()
     {
+        try { directPlayButton.onClick.AddListener(PrepareStartGame); } catch (Exception) { }
         try { directResetButton.onClick.AddListener(PrepareResetData); } catch (Exception) { }
         try { directQuitButton.onClick.AddListener(ExecuteQuit); } catch (Exception) { }
     }
@@ -43,6 +46,13 @@ public class GeneralManager : MonoBehaviour
     {
         try { menuPanel.SetActive(true); } catch (Exception) { }
         try { dialoguePanel.SetActive(true); } catch (Exception) { }
+    }
+
+    public void PrepareStartGame()
+    {
+        // Load the game scene if the start button is pressed
+        SceneManager.LoadScene("GameBoard");
+        Debug.Log("Successfully loaded the game scene.");
     }
 
     public void PrepareResetData()
