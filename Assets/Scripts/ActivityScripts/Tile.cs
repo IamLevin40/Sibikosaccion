@@ -119,7 +119,7 @@ public class Tile : MonoBehaviour
 
         if (Random.value < angryChance)
         {
-            marker.sprite = messageMarkerSprites[0];
+            marker.GetComponent<Image>().sprite = messageMarkerSprites[0];
             markerImage.sprite = messageTaxSprites[0];
             runtimePropertyData.isBought = false;
             UpdatePropertyVisual();
@@ -128,7 +128,7 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            marker.sprite = messageMarkerSprites[1];
+            marker.GetComponent<Image>().sprite = messageMarkerSprites[1];
             markerImage.sprite = messageTaxSprites[1];
             int totalTaxRate = runtimePropertyData.taxRate + (player.hasBayanihanSpirit ? 5 : 0);
             float earnings = runtimePropertyData.revenue * (totalTaxRate / 100f);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour
     public GameObject successUI;
     public EditProperty editPropertyUI;
     public Transform governmentSpawnPoint;
+    public Text gameOverReasonText;
+    public Button successGoHomeButton;
+    public Button gameOverGoHomeButton;
 
     [Header("Managers")]
     public SpawnItemCollectionManager itemCollectionManager;
@@ -66,14 +70,16 @@ public class Player : MonoBehaviour
         buyPropertyUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => BuyProperty());
         buyPropertyUI.SetActive(false);
         insufficientFundsUI.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => OpenSellPropertyUI());
-        insufficientFundsUI.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver());
+        insufficientFundsUI.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver(2));
         insufficientFundsUI.SetActive(false);
         sellPropertyUI.SetActive(false);
-        noMorePropertyUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver());
+        noMorePropertyUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => TriggerGameOver(2));
         noMorePropertyUI.SetActive(false);
         gameOverUI.SetActive(false);
         successUI.SetActive(false);
         editPropertyUI.gameObject.SetActive(false);
+        successGoHomeButton.onClick.AddListener(() => GoHome());
+        gameOverGoHomeButton.onClick.AddListener(() => GoHome());
     }
 
     public void ActivateDice()
@@ -371,7 +377,7 @@ public class Player : MonoBehaviour
 
         if (corruptValue >= maxCorruptValue)
         {
-            TriggerGameOver();
+            TriggerGameOver(1);
         }
     }
 
@@ -423,7 +429,7 @@ public class Player : MonoBehaviour
     {
         if (budget > maxBudget)
         {
-            TriggerGameOver();
+            TriggerGameOver(0);
         }
     }
 
@@ -453,15 +459,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TriggerGameOver()
+    private void TriggerGameOver(int reason)
     {
         noMorePropertyUI.SetActive(false);
         insufficientFundsUI.SetActive(false);
         gameOverUI.SetActive(true);
+
+        string reasonText = reason switch
+        {
+            0 => "Corrupt! You have exceeded the budget.",
+            1 => "Corrupt! You have made too much corruption move.",
+            2 => "Bankrupt! You have no more budget.",
+            _ => "Game Over!"
+        };
+        gameOverReasonText.text = reasonText;
     }
 
     private void TriggerGameSuccess()
     {
         successUI.SetActive(true);
+    }
+
+    private void GoHome()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
