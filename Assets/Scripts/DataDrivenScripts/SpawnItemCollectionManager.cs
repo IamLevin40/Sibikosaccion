@@ -14,21 +14,21 @@ public class SpawnItemCollectionManager : MonoBehaviour
 
     private IEnumerator AnimateItem(Sprite itemSprite, Transform parent, Vector3 spawnPosition, Vector3 endPosition)
     {
-        GameObject item = new GameObject("SpawnedItem");
-        item.transform.SetParent(parent, false);
+        GameObject spawnedItem = new GameObject("SpawnedItem");
+        spawnedItem.transform.SetParent(parent, false);
 
-        Image img = item.AddComponent<Image>();
-        img.sprite = itemSprite;
-        item.transform.position = spawnPosition;
+        Image image = spawnedItem.AddComponent<Image>();
+        image.sprite = itemSprite;
+        spawnedItem.transform.position = spawnPosition;
 
         float elapsed = 0f;
-        Vector3 bouncePeak = spawnPosition + Vector3.up * 0.5f;
+        Vector3 bouncePeak = spawnPosition + Vector3.up * 0.25f;
         
         while (elapsed < bounceDuration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / bounceDuration;
-            item.transform.position = Vector3.Lerp(spawnPosition, bouncePeak, Mathf.Sin(t * Mathf.PI));
+            spawnedItem.transform.position = Vector3.Lerp(spawnPosition, bouncePeak, Mathf.Sin(t * Mathf.PI));
             yield return null;
         }
         
@@ -37,10 +37,10 @@ public class SpawnItemCollectionManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = elapsed / moveDuration;
-            item.transform.position = Vector3.Lerp(spawnPosition, endPosition, t);
+            spawnedItem.transform.position = Vector3.Lerp(spawnPosition, endPosition, t);
             yield return null;
         }
         
-        Destroy(item);
+        Destroy(spawnedItem);
     }
 }

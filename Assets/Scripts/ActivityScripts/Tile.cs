@@ -53,6 +53,7 @@ public class Tile : MonoBehaviour
                 runtimePropertyData.isCursedByLandGrab = false;
                 runtimePropertyData.isBought = false;
                 UpdatePropertyVisual();
+                player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_abandoned", 1.5f, propertyImage.transform.position);
 
                 runtimePropertyData.marketPrice = propertyData.marketPrice;
                 runtimePropertyData.taxRate = propertyData.taxRate;
@@ -63,6 +64,7 @@ public class Tile : MonoBehaviour
                     player.ActivateDice();
                 }
 
+                onCustomersFinished?.Invoke();
                 return;
             }
             else
@@ -129,6 +131,11 @@ public class Tile : MonoBehaviour
             markerImage.sprite = messageTaxSprites[1];
             int totalTaxRate = runtimePropertyData.taxRate + (player.hasBayanihanSpirit ? 5 : 0);
             float earnings = runtimePropertyData.revenue * (totalTaxRate / 100f);
+
+            if (player.hasBayanihanSpirit)
+            {
+                player.visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "community_heart_spirit", 1.5f, spawnPosition);
+            }
 
             if (player.hasGhostEmployeeEffect && runtimePropertyData.taxRate > 10f)
             {

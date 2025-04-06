@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     [Header("Managers")]
     public SpawnItemCollectionManager itemCollectionManager;
     public MysteryCardManager mysteryCardManager;
+    public VisualItemManager visualItemManager;
 
     [Header("Player Info")]
     public int extraCustomerCount = 1;
@@ -159,6 +160,10 @@ public class Player : MonoBehaviour
         foreach (var tile in boughtTiles)
         {
             tile.SpawnCustomers(this, (hasVolunteerInitiative) ? extraCustomerCount : 0, OnCustomersFinished);
+            if (hasVolunteerInitiative)
+            {
+                visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "volunteer_initiative", 1.5f, tile.propertyImage.transform.position);
+            }
         }
         hasVolunteerInitiative = false;
     }
@@ -230,6 +235,7 @@ public class Player : MonoBehaviour
             {
                 price /= 2;
                 buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {price} (50% OFF)";
+                visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_sale", 1.5f, buyPropertyUI.transform.position);
             }
             else
             {
@@ -271,6 +277,7 @@ public class Player : MonoBehaviour
         UpdateEditPropertyVisual();
 
         ActivateDice();
+        visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_purchased", 1.5f, currentTile.propertyImage.transform.position);
 
         Debug.Log($"{name} bought {currentTile.tileData.tileName} for {currentTile.runtimePropertyData.purchaseCost}. Remaining budget: {budget}");
     }
@@ -306,13 +313,16 @@ public class Player : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        int earnings = Mathf.RoundToInt(tile.runtimePropertyData.purchaseCost * tile.runtimePropertyData.sellRate);
-        yield return StartCoroutine(BudgetCollection(earnings, tile.propertyImage.transform.position));
 
         tile.runtimePropertyData.revenue = 0;
         tile.runtimePropertyData.isBought = false;
         UpdateAllPropertiesVisual();
-        
+        visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_abandoned", 1.5f, tile.propertyImage.transform.position);
+        yield return new WaitForSeconds(1f);
+
+        int earnings = Mathf.RoundToInt(tile.runtimePropertyData.purchaseCost * tile.runtimePropertyData.sellRate);
+        yield return StartCoroutine(BudgetCollection(earnings, tile.propertyImage.transform.position));
+    
         sellPropertyUI.SetActive(false);
         CheckPropertyPurchase();
     }

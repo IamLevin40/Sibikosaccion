@@ -105,6 +105,8 @@ public class MysteryCardData : ScriptableObject
             Tile selectedTile = validTiles[Random.Range(0, validTiles.Count)];
             var propertyData = selectedTile.runtimePropertyData;
             propertyData.hasPermanentPriceIncrease = true;
+            player.visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_invest", 1f, selectedTile.propertyImage.transform.position);
+
             Debug.Log($"Infrastructure Investment applied to property {selectedTile.tileData.tileName}");
         }
         else
@@ -135,6 +137,7 @@ public class MysteryCardData : ScriptableObject
 
             float refundAmount = selectedTile.runtimePropertyData.purchaseCost * 1.5f;
             caller.StartCoroutine(player.BudgetCollection(refundAmount, selectedTile.propertyImage.transform.position));
+            player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_eviction", 1.5f, selectedTile.propertyImage.transform.position);
 
             selectedTile.runtimePropertyData.isBought = false;
             selectedTile.UpdatePropertyVisual();
@@ -150,12 +153,30 @@ public class MysteryCardData : ScriptableObject
     {
         player.GetBudgetFromGovernment(5000);
         player.hasSkipNextTax = true;
+        
+        foreach (var tile in player.board.tiles)
+        {
+            var data = tile.runtimePropertyData;
+            if (data != null && data.isBought)
+            {
+                player.visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "community_opinion", 2.5f, tile.propertyImage.transform.position);
+            }
+        }
     }
 
     private void ApplyGhostEmployees(Player player)
     {
         player.GetBudgetFromGovernment(2500);
         player.hasGhostEmployeeEffect = true;
+
+        foreach (var tile in player.board.tiles)
+        {
+            var data = tile.runtimePropertyData;
+            if (data != null && data.isBought)
+            {
+                player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "ghost_employee", 1.5f, tile.propertyImage.transform.position);
+            }
+        }
     }
 
     private void ApplyLandGrab(Player player)
@@ -171,6 +192,7 @@ public class MysteryCardData : ScriptableObject
             selectedTile.runtimePropertyData.isCursedByLandGrab = true;
             selectedTile.runtimePropertyData.isBought = true;
             selectedTile.UpdatePropertyVisual();
+            player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_grab", 1.5f, selectedTile.propertyImage.transform.position);
 
             Debug.Log($"Land Grab applied. Took over {selectedTile.tileData.tileName} for free.");
         }
