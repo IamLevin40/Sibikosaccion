@@ -68,7 +68,7 @@ public class VisualItemManager : MonoBehaviour
     private IEnumerator AnimateAscendItem(GameObject visualItemObject, Image imageComponent, float duration, Vector3 startPosition)
     {
         float elapsedTime = 0f;
-        Vector3 endPosition = startPosition + new Vector3(0, 0.8f, 0);
+        Vector3 endPosition = startPosition + new Vector3(0, 0.5f, 0);
         Color originalColor = imageComponent.color;
 
         while (elapsedTime < duration)
@@ -96,7 +96,7 @@ public class VisualItemManager : MonoBehaviour
     private IEnumerator AnimateDescendItem(GameObject visualItemObject, Image imageComponent, float duration, Vector3 endPosition)
     {
         float elapsedTime = 0f;
-        Vector3 startPosition = endPosition + new Vector3(0, 0.8f, 0);
+        Vector3 startPosition = endPosition + new Vector3(0, 0.5f, 0);
         Color originalColor = imageComponent.color;
 
         imageComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);

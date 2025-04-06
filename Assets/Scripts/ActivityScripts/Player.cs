@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Board board;
     public bool isMoving = false;
     public int budget = 2500;
+    public int maxBudget = 25000;
 
     [Header("Corruption Info")]
     public List<GameObject> corruptBars;
@@ -347,6 +348,7 @@ public class Player : MonoBehaviour
 
         budget += Mathf.RoundToInt(earnings);
         UpdateBudgetUI();
+        CheckForExceedBudget();
     }
 
     private bool HasOwnedProperties()
@@ -417,6 +419,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void CheckForExceedBudget()
+    {
+        if (budget > maxBudget)
+        {
+            TriggerGameOver();
+        }
+    }
+
     private void CheckForGameSuccess()
     {
         int ownedPropertyCount = 0;
@@ -437,7 +447,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (ownedPropertyCount >= 13 && satisfiedPropertyCount >= 13)
+        if (ownedPropertyCount >= 13 && satisfiedPropertyCount >= 13 && budget <= maxBudget)
         {
             TriggerGameSuccess();
         }

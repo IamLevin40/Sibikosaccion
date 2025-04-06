@@ -13021,7 +13021,8 @@ MonoBehaviour:
   currentTileIndex: 0
   board: {fileID: 201054538}
   isMoving: 0
-  budget: 2500
+  budget: 30000
+  maxBudget: 25000
   corruptBars:
   - {fileID: 1969362617}
   - {fileID: 2144171066}
