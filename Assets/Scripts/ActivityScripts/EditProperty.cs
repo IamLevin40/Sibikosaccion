@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class EditProperty : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EditProperty : MonoBehaviour
     public InputField taxRateInput;
 
     private PropertyData propertyData;
+    private static readonly Regex digitsOnly = new Regex(@"^\d*$");
 
     public void Initialize(Tile tile)
     {
@@ -18,31 +20,54 @@ public class EditProperty : MonoBehaviour
         marketPriceInput.text = propertyData.marketPrice.ToString();
         taxRateInput.text = propertyData.taxRate.ToString();
 
-        marketPriceInput.onValueChanged.AddListener(UpdateMarketPrice);
-        taxRateInput.onValueChanged.AddListener(UpdateTaxRate);
+        marketPriceInput.onValueChanged.AddListener(FilterDigitsOnly);
+        marketPriceInput.onEndEdit.AddListener(ValidateMarketPrice);
+
+        taxRateInput.onValueChanged.AddListener(FilterDigitsOnly);
+        taxRateInput.onEndEdit.AddListener(ValidateTaxRate);
     }
 
-    private void UpdateMarketPrice(string value)
+    private void FilterDigitsOnly(string input)
     {
-        if (int.TryParse(value, out int result) && result >= 0)
+        InputField field = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject?.GetComponent<InputField>();
+        if (field != null && !digitsOnly.IsMatch(input))
+        {
+            string filtered = Regex.Replace(input, @"\D", "");
+            field.text = filtered;
+        }
+    }
+
+    private void ValidateMarketPrice(string input)
+    {
+        if (int.TryParse(input, out int result) && result >= 0)
         {
             propertyData.marketPrice = result;
         }
         else
         {
-            marketPriceInput.text = propertyData.marketPrice.ToString();
+            propertyData.marketPrice = 0;
         }
+        marketPriceInput.text = propertyData.marketPrice.ToString();
     }
 
-    private void UpdateTaxRate(string value)
+    private void ValidateTaxRate(string input)
     {
-        if (int.TryParse(value, out int result) && result >= 0 && result <= 100)
+        if (int.TryParse(input, out int result) && result >= 0 && result <= 100)
         {
             propertyData.taxRate = result;
         }
+        else if (int.TryParse(input, out result) && result < 0)
+        {
+            propertyData.taxRate = 0;
+        }
+        else if (int.TryParse(input, out result) && result > 100)
+        {
+            propertyData.taxRate = 100;
+        }
         else
         {
-            taxRateInput.text = propertyData.taxRate.ToString();
+            propertyData.taxRate = 0;
         }
+        taxRateInput.text = propertyData.taxRate.ToString();
     }
 }
