@@ -17,9 +17,8 @@ public class Tile : MonoBehaviour
     public Transform messageMarkersTransform;
     public GameObject messageMarkerPrefab;
     public GameObject[] customerVariants;
+    public Sprite[] messageMarkerSprites;  // 0 - angry, 1 - lend_money
     public Sprite[] messageTaxSprites;  // 0 - angry, 1 - lend_money
-
-    [Header("Mystery Info")]
 
     private int customersRemaining;
     private System.Action onCustomersFinished;
@@ -120,6 +119,7 @@ public class Tile : MonoBehaviour
 
         if (Random.value < angryChance)
         {
+            marker.sprite = messageMarkerSprites[0];
             markerImage.sprite = messageTaxSprites[0];
             runtimePropertyData.isBought = false;
             UpdatePropertyVisual();
@@ -128,6 +128,7 @@ public class Tile : MonoBehaviour
         }
         else
         {
+            marker.sprite = messageMarkerSprites[1];
             markerImage.sprite = messageTaxSprites[1];
             int totalTaxRate = runtimePropertyData.taxRate + (player.hasBayanihanSpirit ? 5 : 0);
             float earnings = runtimePropertyData.revenue * (totalTaxRate / 100f);
