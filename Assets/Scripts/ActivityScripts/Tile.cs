@@ -125,6 +125,8 @@ public class Tile : MonoBehaviour
             UpdatePropertyVisual();
 
             player.AddCorruptValue(5);
+            player.visualItemManager.PlayVisualItem(VisualItemType.DescendItemPop, "property_abandoned", 1.5f, spawnPosition);
+            yield return new WaitForSeconds(2f);
         }
         else
         {
