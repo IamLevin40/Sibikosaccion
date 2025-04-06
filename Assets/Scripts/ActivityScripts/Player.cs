@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public int budget = 2500;
 
     [Header("Corruption Info")]
-    public Slider corruptBar;
-    public Image corruptFillImage;
+    public List<GameObject> corruptBars;
+    public List<Image> corruptBarImages;
     public Color[] corruptColors;   // 0 - low, 1 - mid, 2 - high
     public int corruptValue = 0;
     public int maxCorruptValue = 50;
@@ -374,28 +374,37 @@ public class Player : MonoBehaviour
 
     private void UpdateCorruptBarUI()
     {
-        if (corruptBar != null)
-        {
-            float progress = (float)corruptValue / maxCorruptValue;
-            corruptBar.value = progress;
+        if (corruptBars == null || corruptBars.Count != 10 || corruptBarImages.Count != 10)
+            return;
 
-            if (corruptFillImage != null)
+        float progress = (float)corruptValue / maxCorruptValue;
+
+        for (int i = 0; i < 10; i++)
+        {
+            float threshold = (i + 1) * 0.1f;
+
+            bool shouldBeActive = progress >= threshold;
+            corruptBars[i].SetActive(shouldBeActive);
+
+            if (shouldBeActive && corruptBarImages[i] != null)
             {
+                float stepProgress = (i + 1) / 10f;
+
                 Color lowColor = corruptColors[0];
                 Color midColor = corruptColors[1];
                 Color highColor = corruptColors[2];
 
                 Color lerpedColor;
-                if (progress < 0.5f)
+                if (stepProgress < 0.5f)
                 {
-                    lerpedColor = Color.Lerp(lowColor, midColor, progress / 0.5f);
+                    lerpedColor = Color.Lerp(lowColor, midColor, stepProgress / 0.5f);
                 }
                 else
                 {
-                    lerpedColor = Color.Lerp(midColor, highColor, (progress - 0.5f) / 0.5f);
+                    lerpedColor = Color.Lerp(midColor, highColor, (stepProgress - 0.5f) / 0.5f);
                 }
 
-                corruptFillImage.color = lerpedColor;
+                corruptBarImages[i].color = lerpedColor;
             }
         }
     }

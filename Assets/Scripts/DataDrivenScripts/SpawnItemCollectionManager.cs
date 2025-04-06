@@ -19,7 +19,10 @@ public class SpawnItemCollectionManager : MonoBehaviour
 
         Image image = spawnedItem.AddComponent<Image>();
         image.sprite = itemSprite;
-        spawnedItem.transform.position = spawnPosition;
+
+        RectTransform rectTransform = spawnedItem.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(70, 70);
+        rectTransform.position = spawnPosition;
 
         float elapsed = 0f;
         Vector3 bouncePeak = spawnPosition + Vector3.up * 0.25f;
