@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 17_TileData
   m_EditorClassIdentifier: 
   tileName: Public Park
-  tileLogoSprite: {fileID: 21300000, guid: 1067b312e3755f2409a692b9968ec34c, type: 3}
+  tileLogoSprite: {fileID: 21300000, guid: 8d77f04eb32711246884e08b7bd8b43b, type: 3}
   tileType: 1
