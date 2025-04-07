@@ -15,6 +15,6 @@ MonoBehaviour:
   cardName: Land Grab
   description: Take over a random unowned property without paying its cost. However,
     one customer is lost every time the dice is rolled.
-  frontImage: {fileID: 21300000, guid: 22aef5f995485ef40b513a463fc497f9, type: 3}
+  frontImage: {fileID: 21300000, guid: fa4a5edf68fe563468a616d1c3796608, type: 3}
   backImage: {fileID: 21300000, guid: 7824801ec00f84140ab39075044a5c34, type: 3}
   cardType: 0

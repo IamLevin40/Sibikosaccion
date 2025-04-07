@@ -15,6 +15,6 @@ MonoBehaviour:
   cardName: Community Grant
   description: If customers are satisfied by the market price of a property, receive
     a random bonus (P25 - P50). This is for all properties with good customer satisfaction.
-  frontImage: {fileID: 21300000, guid: 9d4a76e264ae56c4c9159f489581882d, type: 3}
+  frontImage: {fileID: 21300000, guid: 9515cf70063aff644b2d01e1ce2a7e2a, type: 3}
   backImage: {fileID: 21300000, guid: 7824801ec00f84140ab39075044a5c34, type: 3}
   cardType: 1

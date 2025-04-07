@@ -15,6 +15,6 @@ MonoBehaviour:
   cardName: Ghost Employees
   description: Allocate a budget for fake workers and secretly stash the money. Gain
     P 2500 but properties with tax rates over 10% generate 25% less earnings permanently.
-  frontImage: {fileID: 21300000, guid: 22aef5f995485ef40b513a463fc497f9, type: 3}
+  frontImage: {fileID: 21300000, guid: 83061ce9faf0c0c49b37740fd18965d4, type: 3}
   backImage: {fileID: 21300000, guid: 7824801ec00f84140ab39075044a5c34, type: 3}
   cardType: 0
