@@ -123,24 +123,21 @@ public class MysteryCardManager : MonoBehaviour
         float duration = 0.3f;
         float time = 0f;
 
-        // Rotate from 0 to 90
         while (time < duration)
         {
-            float yRot = Mathf.Lerp(0f, 90f, time / duration);
-            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
+            float yRotation = Mathf.Lerp(0f, 90f, time / duration);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRotation, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }
 
-        // Swap image to front
         cardImage.sprite = drawnCards[index].frontImage;
 
-        // Rotate back from 90 to 0
         time = 0f;
         while (time < duration)
         {
-            float yRot = Mathf.Lerp(90f, 0f, time / duration);
-            cardObject.transform.rotation = Quaternion.Euler(0, yRot, cardObject.transform.eulerAngles.z);
+            float yRotation = Mathf.Lerp(90f, 0f, time / duration);
+            cardObject.transform.rotation = Quaternion.Euler(0, yRotation, cardObject.transform.eulerAngles.z);
             time += Time.deltaTime;
             yield return null;
         }

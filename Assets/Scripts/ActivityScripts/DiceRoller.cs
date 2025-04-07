@@ -37,12 +37,10 @@ public class DiceRoller : MonoBehaviour
         rollButton.interactable = true;
         rollText.SetActive(true);
 
-        // Initialize values
         startRotation = startPosition.rotation;
         startScale = diceTransform.localScale;
         rollScale = startScale * 0.5f;
 
-        // Set dice at start
         diceTransform.position = startPosition.position;
         diceTransform.rotation = startRotation;
         diceTransform.localScale = startScale;
@@ -61,17 +59,14 @@ public class DiceRoller : MonoBehaviour
         isRolling = true;
         rollButton.interactable = false;
 
-        // Animate move to roll area with scale & rotation
         yield return AnimateMoveToRollArea();
 
-        // Initialize roll physics
         dicePosition = diceTransform.position;
         velocity = Random.insideUnitCircle.normalized * Random.Range(minLaunchSpeed, maxLaunchSpeed);
 
         float timeSinceLastFace = 0f;
         int currentFace = 0;
 
-        // Roll with velocity-based face changing
         while (velocity.magnitude > stopThreshold)
         {
             MoveAndBounce();
@@ -89,7 +84,6 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
 
-        // Slower final phase
         while (velocity.magnitude > 5f)
         {
             MoveAndBounce();
@@ -107,13 +101,10 @@ public class DiceRoller : MonoBehaviour
             yield return null;
         }
 
-        // Final result
         int finalFace = currentFace;
         diceImage.sprite = diceFaces[finalFace];
 
         yield return new WaitForSeconds(1f);
-
-        // Return to start
         yield return MoveBackToStart(finalFace + 1);
 
         isRolling = false;
@@ -149,19 +140,18 @@ public class DiceRoller : MonoBehaviour
         dicePosition = rollArea.TransformPoint(localPosition);
         diceTransform.position = dicePosition;
 
-        // Apply rotation based on bounce
         if (bouncedX || bouncedY)
         {
-            float spin = (bouncedX ? velocity.x : 0f) + (bouncedY ? velocity.y : 0f);
-            diceTransform.Rotate(0, 0, spin * 0.05f);
+            float spinValue = (bouncedX ? velocity.x : 0f) + (bouncedY ? velocity.y : 0f);
+            diceTransform.Rotate(0, 0, spinValue * 0.05f);
         }
     }
 
     private IEnumerator AnimateMoveToRollArea()
     {
-        Vector3 start = startPosition.position;
+        Vector3 startPos = startPosition.position;
         Quaternion startRotation = startPosition.rotation;
-        Vector3 target = GetCenterOfRect(rollArea);
+        Vector3 targetPos = GetCenterOfRect(rollArea);
         Quaternion targetRotation = Quaternion.identity;
 
         float duration = 0.2f;
@@ -172,31 +162,28 @@ public class DiceRoller : MonoBehaviour
             timer += Time.deltaTime;
             float t = timer / duration;
 
-            Vector3 pos = Vector3.Lerp(start, target, t);
-            diceTransform.position = pos;
+            Vector3 position = Vector3.Lerp(startPos, targetPos, t);
+            diceTransform.position = position;
 
-            // Scale: peak at middle of transition
             float scaleT = t < 0.5f ? (t / 0.5f) : (1f - (t - 0.5f) / 0.5f);
             Vector3 scale = Vector3.Lerp(startScale, rollScale, scaleT);
             diceTransform.localScale = scale;
 
-            // Rotation: gradually to 0
             diceTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
 
             yield return null;
         }
 
-        // Snap to target
-        diceTransform.position = target;
+        diceTransform.position = targetPos;
         diceTransform.localScale = rollScale;
         diceTransform.rotation = targetRotation;
     }
 
     private IEnumerator MoveBackToStart(int result)
     {
-        Vector3 start = diceTransform.position;
+        Vector3 startPos = diceTransform.position;
         Quaternion currentRotation = diceTransform.rotation;
-        Vector3 end = startPosition.position;
+        Vector3 endPos = startPosition.position;
         Quaternion endRotation = startRotation;
 
         float duration = 0.8f;
@@ -208,14 +195,13 @@ public class DiceRoller : MonoBehaviour
             float t = timer / duration;
             float easeOut = 1f - Mathf.Pow(1f - t, 3);
 
-            diceTransform.position = Vector3.Lerp(start, end, easeOut);
+            diceTransform.position = Vector3.Lerp(startPos, endPos, easeOut);
             diceTransform.localScale = Vector3.Lerp(rollScale, startScale, easeOut);
             diceTransform.rotation = Quaternion.Slerp(currentRotation, endRotation, easeOut);
             yield return null;
         }
 
-        // Final snap
-        diceTransform.position = end;
+        diceTransform.position = endPos;
         diceTransform.localScale = startScale;
         diceTransform.rotation = endRotation;
 
