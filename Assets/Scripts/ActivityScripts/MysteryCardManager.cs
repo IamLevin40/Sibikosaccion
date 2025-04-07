@@ -44,7 +44,7 @@ public class MysteryCardManager : MonoBehaviour
         DrawUniqueCards(initialDraw: true);
 
         cardSelectionUI.SetActive(true);
-        rerollButton.gameObject.SetActive(true);
+        rerollButton.gameObject.SetActive(false);
 
         rerollButton.onClick.RemoveAllListeners();
         rerollButton.onClick.AddListener(() =>
@@ -150,6 +150,7 @@ public class MysteryCardManager : MonoBehaviour
 
     private void PreviewCard(int index)
     {
+        rerollButton.gameObject.SetActive(true);
         cardDetailsUI.SetActive(true);
         currentlySelectedCard = drawnCards[index];
 
@@ -194,8 +195,9 @@ public class MysteryCardManager : MonoBehaviour
                 {
                     questionsUI.SetActive(false);
                     cardSelectionUI.SetActive(true);
-                    DrawUniqueCards(initialDraw: false);
+                    rerollButton.gameObject.SetActive(false);
                     hasRerolled = true;
+                    DrawUniqueCards(initialDraw: false);
                     StartCoroutine(DisplayQuestionMessage(true));
                 });
             }
