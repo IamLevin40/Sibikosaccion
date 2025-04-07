@@ -9,7 +9,7 @@ Sibikosaccion is a single-player, offline-first strategic board game where you p
 To get a local copy up and running:
 
 ```bash
-git clone https://github.com/your-username/sibikosaccion.git
+git clone https://github.com/IamLevin40/sibikosaccion.git
 ```
 
 - Open the project folder in Unity (version 2022.3.36f1 or later).
