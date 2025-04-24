@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 
-public class EditProperty : MonoBehaviour
+public class EditPropertyManager : MonoBehaviour
 {
     public Text tileNameText;
     public Image tileLogoImage;
     public InputField marketPriceInput;
     public InputField taxRateInput;
+    public ShowStatsPropertyManager showStatsPropertyManager;
 
     private PropertyData propertyData;
     private static readonly Regex digitsOnly = new Regex(@"^\d*$");

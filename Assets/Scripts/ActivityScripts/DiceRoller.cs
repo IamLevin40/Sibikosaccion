@@ -24,12 +24,18 @@ public class DiceRoller : MonoBehaviour
     public float slowDamping = 0.7f;
     public float stopThreshold = 0.1f;
 
+    [Header("Admin Mode")]
+    public bool isAdmin = false;
+
     private Vector2 velocity;
     private Vector2 dicePosition;
     private bool isRolling = false;
     private Quaternion startRotation;
     private Vector3 startScale;
     private Vector3 rollScale;
+
+    private int[] adminRollSequence  = { 4, 6, 3, 5, 2, 1, 3, 5, 4, 3, 4, 2, 4 };
+    private int currentAdminRollIndex  = 0;
 
     private void Start()
     {
@@ -51,6 +57,7 @@ public class DiceRoller : MonoBehaviour
         if (player.isMoving || isRolling) return;
         rollText.SetActive(false);
         editPropertyUI.SetActive(false);
+        player.editPropertyUI.showStatsPropertyManager.ClearUI();
         StartCoroutine(RollDicePhysics());
     }
 
@@ -99,6 +106,13 @@ public class DiceRoller : MonoBehaviour
 
             velocity *= slowDamping;
             yield return null;
+        }
+
+        if (isAdmin)
+        {
+            currentFace = adminRollSequence[currentAdminRollIndex] - 1;
+            currentAdminRollIndex = (currentAdminRollIndex + 1) % adminRollSequence.Length;
+            Debug.Log("Admin Roll: " + currentFace);
         }
 
         int finalFace = currentFace;

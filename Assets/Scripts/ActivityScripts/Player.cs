@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public GameObject noMorePropertyUI;
     public GameObject gameOverUI;
     public GameObject successUI;
-    public EditProperty editPropertyUI;
+    public EditPropertyManager editPropertyUI;
     public Transform governmentSpawnPoint;
     public Text gameOverReasonText;
     public Button successGoHomeButton;
@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
 
     private Tile currentTile;
     private int totalTilesWithCustomersRemaining;
+    private bool isGameOver = false;
 
     public void Start()
     {
@@ -84,16 +85,15 @@ public class Player : MonoBehaviour
 
     public void ActivateDice()
     {
+        if (isGameOver) return;
         dice.rollButton.interactable = true;
         dice.rollText.SetActive(true);
     }
 
     public void Move(int steps)
     {
-        if (!isMoving)
-        {
-            StartCoroutine(MoveStepByStep(steps));
-        }
+        if (isGameOver || isMoving) return;
+        StartCoroutine(MoveStepByStep(steps));
     }
 
     private IEnumerator MoveStepByStep(int steps)
@@ -235,6 +235,7 @@ public class Player : MonoBehaviour
     {
         editPropertyUI.gameObject.SetActive(true);
         editPropertyUI.Initialize(currentTile);
+        editPropertyUI.showStatsPropertyManager.Initialize(this);
     }
 
     private void CheckPropertyPurchase()
@@ -250,7 +251,7 @@ public class Player : MonoBehaviour
             {
                 price /= 2;
                 buyPropertyUI.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = $"P {price} (50% OFF)";
-                visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_sale", 1.5f, buyPropertyUI.transform.position);
+                visualItemManager.PlayVisualItem(VisualItemType.AscendItemPop, "property_sale", 1.5f, currentTile.propertyImage.transform.position);
             }
             else
             {
@@ -461,6 +462,9 @@ public class Player : MonoBehaviour
 
     private void TriggerGameOver(int reason)
     {
+        isGameOver = true;
+        Time.timeScale = 0f;
+        
         noMorePropertyUI.SetActive(false);
         insufficientFundsUI.SetActive(false);
         gameOverUI.SetActive(true);
@@ -477,11 +481,15 @@ public class Player : MonoBehaviour
 
     private void TriggerGameSuccess()
     {
+        isGameOver = true;
+        Time.timeScale = 0f;
+        
         successUI.SetActive(true);
     }
 
     private void GoHome()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }
